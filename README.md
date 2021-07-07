@@ -67,7 +67,7 @@ CEGMA, once installed, or containerized, is simple to run (it has a lot of optio
 (user@host)-$ docker run --rm \
 -v $(pwd):/in -w /in \
 chrishah/cegma:2.5 \
-cegma --threads 1 data/genome_assembly.fasta
+cegma --threads 1 -g data/genome_assembly.fasta
 ```
 While it is running we can skip to the next part and talk about mapping reads to genomes.
 
