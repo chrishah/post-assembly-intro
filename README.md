@@ -216,8 +216,8 @@ Finally, one of the nicest features of blobtools is that the visualizations can 
 
 So, you could download the entirety of NCBI's nt (nucleotide) database. BLAST you assembly against it and use the info you get to annotate you blobs.
 
-***Disclaimer***
-Do not do this as part of the course (if you are in one right now), unless you are specifically asked. The next steps will involve downloading (currently) some 100GB worth of data and subsequently a BLAST search that might take several days, if not parallelized in a smart way.
+***Attention***
+> Do not do this as part of the course (if you are in one right now), unless you are specifically asked. The next steps will involve downloading (currently) some 100GB worth of data and subsequently a BLAST search that might take several days, if not parallelized in a smart way.
  
 So, for completeness sake, you could download the entire `nt` database and decompress it.
 ```bash
@@ -242,6 +242,9 @@ Then, you would use BLAST to compare your genome against the database - the blob
  -num_threads 10 \
  -out blastn.fmt6.out.txt
 ```
+
+***continue here, as part of the course***
+
 
 An example file comes with the repository - check it out.
 ```bash
