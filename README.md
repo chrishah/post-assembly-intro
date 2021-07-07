@@ -60,14 +60,192 @@ There are currently two tools available:
  - [CEGMA](http://korflab.ucdavis.edu/datasets/cegma/)
 
 The latter is unfortunately not maintained any more (some [history](http://www.acgt.me/blog/2015/5/18/goodbye-cegma-hello-busco)), but it can still be used if you can get it installed on your system. I have made a docker container for it, since I am planning to keep using it - see [here](https://hub.docker.com/r/chrishah/cegma).
-Anyway, BUSCO is the 'new kid' (well not so new any more) and works also very well. We'll run it as part of a different session, for now let's stick to CEGMA
+Anyway, BUSCO is the 'new kid' (well, not so new any more) and works also very well. We'll run it as part of a different [session](https://github.com/chrishah/phylogenomics-intro), for now let's stick to CEGMA.
 
-CEGMA, once installed, or containerized, is simple to run:
+CEGMA, once installed, or containerized, is simple to run (it has a lot of options that you can explore in your own time) - takes a while though:
 ```bash
 (user@host)-$ docker run --rm \
 -v $(pwd):/in -w /in \
 chrishah/cegma:2.5 \
-cegma
+cegma --threads 2 data/genome_assembly.fasta
+```
+While it is running we can skip to the next part and talk about mapping reads to genomes.
+
+Once it's done the thing you want to be looking at is the CEGMA report.
+```bash
+(user@host)-$ cat output.completeness_report
 ```
 
-So, let's run BUSCO on our assembly.
+__3.) Mapping reads to genomes__
+
+Read mapping is covered by many online tutorials, so I'll just show you how it could be done with a tool called [bowtie-2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml).
+
+First index your genome file.
+```bash
+(user@host)-$ docker run --rm \
+-v $(pwd):/in -w /in \
+reslp/bowtie2:2.3.5 \
+bowtie2-build data/genome_assembly.fasta my_genome.index -q
+```
+Check out which new files have been created.
+```bash
+(user@host)-$ ls -hlrt
+```
+
+Then, map the reads to the indexed genome.
+```bash
+(user@host)-$ docker run --rm \
+-v $(pwd):/in -w /in \
+reslp/bowtie2:2.3.5 \
+bowtie2 -1 data/reads.1.fastq.gz -2 data/reads.2.fastq.gz --threads 2 -q --phred33 --fr -x my_genome.index -S my_mapped_reads.sam
+```
+This has produced a file called `my_mapped_reads.sam`. This is simple text file formatted in [sam](https://samtools.github.io/hts-specs/SAMv1.pdf) format, that contains information on where in the genome certain reads mapped (if at all).
+
+You can look into the file, if you dare.. - just the first 1000 lines.
+```bash
+(user@host)-$ head -n 1000 my_mapped_reads.sam
+```
+Since SAM is just a text file and for large amounts of data these files may get very big the developers have established a binary (non-human readable) version of SAM, which is called BAM.  
+
+The next step will be to convert the SAM to a BAM file.
+```bash
+(user@host)-$ docker run --rm \
+-v $(pwd):/in -w /in \
+reslp/samtools:1.9 \
+samtools view -bS my_mapped_reads.sam -o my_mapped_reads.bam -@ 2
+```
+
+Check out the size of the newest file `my_mapped_reads.bam` as compared to the original SAM file. Note that we have not lost any information - we have just compressed the data.
+```bash
+(user@host)-$ ls -hlrt
+```
+
+Two more steps that are usually being done are sorting and indexing the bam file - this is the convention, and what most downstream tools expect.
+```bash
+(user@host)-$ docker run --rm \
+-v $(pwd):/in -w /in \
+reslp/samtools:1.9 \
+samtools sort -o my_mapped_reads.sorted.bam my_mapped_reads.bam -@ 2
+
+(user@host)-$ docker run --rm \
+-v $(pwd):/in -w /in \
+reslp/samtools:1.9 \
+samtools index my_mapped_reads.sorted.bam -@ 2
+
+```
+
+A common step that I want to at least mention is the removal of duplicates. [Picard](https://broadinstitute.github.io/picard/) offers a good option there.
+
+```bash
+(user@host)-$ docker run --rm \
+-v $(pwd):/in -w /in \
+broadinstitute/picard:2.20.6 \
+java -jar /usr/picard/picard.jar MarkDuplicates \
+INPUT=my_mapped_reads.sorted.bam OUTPUT=my_mapped_reads.sorted.duprmvd.bam METRICS_FILE=my_mapped_reads.sorted.duprmvd.metrics REMOVE_DUPLICATES=true ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=1000
+```
+
+I encourage you to inspect the assembly and reads mapping to it visually. A possible tools is the Integrative Genomics Viewer [igv](https://software.broadinstitute.org/software/igv/). You can install it at some point, but for now we're going to use through a webapp - go [here](https://igv.org/app/).
+
+First we need to index our reference genome.
+Index the genome for viewing.
+```bash
+(user@host)-$ docker run --rm \
+-v $(pwd):/in -w /in \
+reslp/samtools:1.9 \
+samtools faidx data/genome_assembly.fasta
+```
+
+In the web app, go *Genome->Local File->*, then make sure to select both files, so `genome_assembly.fasta` together with `genome_assembly.fasta.fai`.
+
+Now, to get the reads visible, go to *Tracks->Local File* and select `my_mapped_reads.sorted.bam` and `my_mapped_reads.sorted.bam.bai` again at the same time before clicking *Open*.
+
+Enjoy!
+
+__4.) Blobtools__
+
+A nice tool for assessing contamination in your genome assembly is [blobtools](https://blobtools.readme.io/docs). It summarizes aggregate properties of the assembly (GC content, coverage of each contig/scaffold) which sometimes reveals interesting patterns in assemblies.
+
+The basic things you need are
+ - an assembly - fasta file
+ - information about coverage
+
+Blobtools can extract coverage information from bam files (gladly we made one above). It also can parse the needed information directly from the fasta headers, if you have used certain assemblers, e.g. Platanus or SPAdes. Our assembly was done with SPADes, so we can try that.
+
+Blobtools needs to be run in three steps - do consult the manual on the Blobtools [webpage](https://blobtools.readme.io/docs) to get more info on what the individual steps are doing.
+```bash
+(user@host)-$ docker run --rm \
+-v $(pwd):/in -w /in \
+chrishah/blobtools:v1.1.1 \
+blobtools create -i data/genome_assembly.fasta -y spades -o blobtools_spades
+
+(user@host)-$ docker run --rm \
+-v $(pwd):/in -w /in \
+chrishah/blobtools:v1.1.1 \
+blobtools view -i blobtools_spades.blobDB.json
+
+(user@host)-$ docker run --rm \
+-v $(pwd):/in -w /in \
+chrishah/blobtools:v1.1.1 \
+blobtools plot -i blobtools_spades.blobDB.json
+```
+
+The file you want to look at first of all is: `blobtools_spades.blobDB.json.bestsum.phylum.p8.span.100.blobplot.spades.png`, but there is lots more to explore on your own.
+
+Now, let's assume you hadn't used SPAdes as your assembler, you can still use blobtools, but in this case you need to give the coverage information in a different way, e.g. a bam file.
+
+```bash
+(user@host)-$ docker run --rm \
+-v $(pwd):/in -w /in \
+chrishah/blobtools:v1.1.1 \
+blobtools create -i data/genome_assembly.fasta -b my_mapped_reads.sorted.bam -o blobtools_bam
+
+(user@host)-$ docker run --rm \
+-v $(pwd):/in -w /in \
+chrishah/blobtools:v1.1.1 \
+blobtools view -i blobtools_bam.blobDB.json
+
+(user@host)-$ docker run --rm \
+-v $(pwd):/in -w /in \
+chrishah/blobtools:v1.1.1 \
+blobtools plot -i blobtools_bam.blobDB.json
+
+```
+Checkout `blobtools_bam.blobDB.json.bestsum.phylum.p8.span.100.blobplot.bam0.png` and `blobtools_bam.blobDB.json.bestsum.phylum.p8.span.100.blobplot.read_cov.bam0.png` - there shouldn't be much difference to the first result.
+
+Finally, one of the nicest features of blobtools is that the visualizations can be taxonomically annotated - see [here](https://blobtools.readme.io/docs/taxonomic-annotation). What you'll need is a so-called 'hits files'. This is essentially a text files obtained via comparing the assembly against a reference database using `blast` or other tools - see [here](https://blobtools.readme.io/docs/taxonomy-file).
+
+So, you could download the entirety of NCBI's nt (nucleotide) database. BLAST you assembly against it and use the info you get to annotate you blobs.
+
+***Disclaimer***
+Do not do this as part of the course (if you are in one right now), unless you are specifically asked. The next steps will involve downloading (currently) some 100GB worth of data and subsequently a BLAST search that might take several days, if not parallelized in a smart way.
+ 
+So, for completeness sake, you could download the entire `nt` database and decompress it.
+```bash
+(user@host)-$ mkdir db
+(user@host)-$ cd db
+(user@host)-$ wget "ftp://ftp.ncbi.nlm.nih.gov/blast/db/nt.??.tar.gz"
+(user@host)-$ for a in nt.*.tar.gz; do tar xzf $a; done
+(user@host)-$ cd ..
+```
+
+Then, you would use BLAST to compare your genome against the database - the blobtools people suggest a certain way to use blast for this. You could change the params however you see fit of course, but the main thing is that you get the output in the right format.
+```bash
+(user@host)-$ ASSEMBLY=data/genome_assembly.fasta
+(user@host)-$ DB=db/nt
+(user@host)-$ blastn \
+ -query $ASSEMBLY \
+ -db $DB \
+ -outfmt "6 qseqid staxids bitscore std" \
+ -max_target_seqs 1 \
+ -max_hsps 1 \
+ -evalue 1e-25 \
+ -num_threads 10 \
+ -out blastn.fmt6.out.txt
+```
+
+An example file comes with the repository - check it out.
+```bash
+(user@host)-$ cat data/blastn.fmt6.out.txt
+```
+
+
