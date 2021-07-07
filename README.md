@@ -293,7 +293,7 @@ First get all contig/scaffold ids that were classified as Chordata.
 (user@host)-$ grep "Chordata" blobtools_tax.blobDB.table.txt | cut -f 1 > Chordata.list.txt
 ```
 
-Then, use another tool from the blobtools suite to extract the relevant reads from the original bam file.
+Then, use another tool from the blobtools suite (see [here](https://blobtools.readme.io/docs/bamfilter)) to extract the relevant reads from the original bam file.
 ```bash
 (user@host)-$ docker run --rm \
 -v $(pwd):/in -w /in \
