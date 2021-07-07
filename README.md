@@ -249,3 +249,63 @@ An example file comes with the repository - check it out.
 ```
 
 
+Now, try to give this additional info to blobtools. Last thing you need is a so called *taxdump*, this is a textfile that contains the taxonomic information for all entries in the Genbank databases. You can download it and unpack.
+```bash
+(user@host)-$ wget ftp://ftp.ncbi.nlm.nih.gov/pub/taxonomy/taxdump.tar.gz
+(user@host)-$ tar xzfv taxdump.tar.gz
+```
+From this you get a file `nodes.dmp` and a `names.dmp` file - these you need in the next step.
+
+```bash
+(user@host)-$ docker run --rm \
+-v $(pwd):/in -w /in \
+chrishah/blobtools:v1.1.1 \
+blobtools create -i data/genome_assembly.fasta -b my_mapped_reads.sorted.bam \
+--nodes nodes.dmp --names names.dmp --hitsfile data/blastn.fmt6.out.txt -o blobtools_tax
+
+(user@host)-$ docker run --rm \
+-v $(pwd):/in -w /in \
+chrishah/blobtools:v1.1.1 \
+blobtools view -i blobtools_tax.blobDB.json
+
+(user@host)-$ docker run --rm \
+-v $(pwd):/in -w /in \
+chrishah/blobtools:v1.1.1 \
+blobtools plot -i blobtools_tax.blobDB.json
+
+```
+
+What you want to look at initially is:
+ - `blobtools_tax.blobDB.json.bestsum.phylum.p8.span.100.blobplot.bam0.png`
+ - `blobtools_tax.blobDB.json.bestsum.phylum.p8.span.100.blobplot.read_cov.bam0.png`
+
+Nice, no?
+
+Now what to do with this info?
+
+You could for example take all reads that contributed to contigs that were classified as 'Chordata', and reassemble them, if that happens to be your target.
+
+First get all contig/scaffold ids that were classified as Chordata.
+```bash
+(user@host)-$ grep "Chordata" blobtools_tax.blobDB.table.txt | cut -f 1 > Chordata.list.txt
+```
+
+Then, use another tool from the blobtools suite to extract the relevant reads from the original bam file.
+```bash
+(user@host)-$ docker run --rm \
+-v $(pwd):/in -w /in \
+chrishah/blobtools:v1.1.1 \
+blobtools bamfilter -b my_mapped_reads.sorted.bam -i Chordata.list.txt --read_format fq --noninterleaved -o reads_Chordata
+```
+
+Thanks for joining us today!
+
+If you have any questions, comments, feedback (good OR bad), let me know!
+
+__What do you think?__
+
+# Contact
+Christoph Hahn - <christoph.hahn@uni-graz.at>
+
+
+
