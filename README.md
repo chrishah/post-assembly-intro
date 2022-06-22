@@ -83,10 +83,11 @@ Usually, the most relevant files are:
 and fasta files in the directory:
  - `busco/run_eukaryota_odb10/busco_sequences/`
 
+CEGMA, once installed, or containerized, is simple to run (it has a lot of options that you can explore in your own time) - takes a while though:
+
 ***ATTENTION***
 > The next step (`cegma`) will run for about an hour, so if you are in a rush, you can also skip this and look at the output that we have deposited with the repo (see below).
 
-CEGMA, once installed, or containerized, is simple to run (it has a lot of options that you can explore in your own time) - takes a while though:
 ```bash
 (user@host)-$ docker run --rm \
 -v $(pwd):/in -w /in \
