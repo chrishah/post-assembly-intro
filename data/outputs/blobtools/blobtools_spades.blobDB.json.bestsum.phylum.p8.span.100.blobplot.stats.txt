@@ -1,0 +1,5 @@
+## 1.1.1
+## spades=/in/data/genome_assembly.fasta
+# name	colour	count_visible	count_visible_perc	span_visible	span_visible_perc	n50	gc_mean	gc_std	spades_mean	spades_std	spades_read_map	spades_read_map_p
+all	None	557	100.0%	6,859,483	100.0%	17,978	0.42	0.031	56.8	30.6	0	0.0%
+	#1f77b4	557	100.0%	6,859,483	100.0%	17,978	0.42	0.031	56.8	30.6	0	0.0%
