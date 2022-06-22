@@ -72,13 +72,14 @@ Now, let's run BUSCO (will take about 15 minutes):
               -c 1 \
               --augustus --augustus_species schistosoma
 ```
-If you ran BUSCO as above it will have created one directory called `busco` (because you said `-o busco` above. 
+If you ran BUSCO as above it will have created one directory called `busco` (because you said `-o busco` above). 
 
 A detailed exlanation of the parameters and the BUSCO output you can also find as part of a different [session](https://github.com/chrishah/phylogenomics-intro).
 
 Usually, the most relevant files are:
  - `busco/run_eukaryota_odb10/short_summary.txt`
  - `busco/run_eukaryota_odb10/full_table.tsv`
+
 and fasta files in the directory:
  - `busco/run_eukaryota_odb10/busco_sequences/`
 
