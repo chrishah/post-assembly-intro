@@ -184,6 +184,12 @@ reslp/samtools:1.9 \
 samtools faidx data/genome_assembly.fasta
 ```
 
+If you followed until here you're going to need the following files downloaded locally:
+ - `data/genome_assembly.fasta` (came with the repo)
+ - `data/genome_assembly.fasta.fai` (index prodcued in the last step above)
+ - `my_mapped_reads.sorted.bam` (sorted bam file from above)
+ - `my_mapped_reads.sorted.bam.bai` (index of sorted bam file from above)
+
 In the web app, go *Genome->Local File->*, then make sure to select both files, so `genome_assembly.fasta` together with `genome_assembly.fasta.fai`.
 
 Now, to get the reads visible, go to *Tracks->Local File* and select `my_mapped_reads.sorted.bam` and `my_mapped_reads.sorted.bam.bai` again at the same time before clicking *Open*.
