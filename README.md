@@ -188,6 +188,10 @@ In the web app, go *Genome->Local File->*, then make sure to select both files, 
 
 Now, to get the reads visible, go to *Tracks->Local File* and select `my_mapped_reads.sorted.bam` and `my_mapped_reads.sorted.bam.bai` again at the same time before clicking *Open*.
 
+***ATTENTION***
+> Note that not all contigs will have reads mapping to it, because this is a reduced set of reads. You can select for example conig `NODE_288_length_24172_cov_71.622494` in IGV for exploration.
+
+
 Enjoy!
 
 __4.) Blobtools__
