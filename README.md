@@ -60,7 +60,30 @@ There are currently two tools available:
  - [CEGMA](http://korflab.ucdavis.edu/datasets/cegma/)
 
 The latter is unfortunately not maintained any more (some [history](http://www.acgt.me/blog/2015/5/18/goodbye-cegma-hello-busco)), but it can still be used if you can get it installed on your system. I have made a docker container for it, since I am planning to keep using it - see [here](https://hub.docker.com/r/chrishah/cegma).
-Anyway, BUSCO is the 'new kid' (well, not so new any more) and works also very well. We'll run it as part of a different [session](https://github.com/chrishah/phylogenomics-intro), for now let's stick to CEGMA.
+Anyway, BUSCO is the 'new kid' (well, not so new any more) and works also very well. 
+
+Now, let's run BUSCO (will take about 15 minutes):
+```bash
+(user@host)-$ docker run \
+              --rm -v $(pwd):/in -w /in \
+              ezlabgva/busco:v5.2.1_cv1 \
+              busco -i data/genome_assembly.fasta \
+              -o busco -m genome -l eukaryota \
+              -c 1 \
+              --augustus --augustus_species schistosoma
+```
+If you ran BUSCO as above it will have created one directory called `busco` (because you said `-o busco` above. 
+
+A detailed exlanation of the parameters and the BUSCO output you can also find as part of a different [session](https://github.com/chrishah/phylogenomics-intro).
+
+Usually, the most relevant files are:
+ - `busco/run_eukaryota_odb10/short_summary.txt`
+ - `busco/run_eukaryota_odb10/full_table.tsv`
+and fasta files in the directory:
+ - `busco/run_eukaryota_odb10/busco_sequences/`
+
+***ATTENTION***
+> The next step (`cegma`) will run for about an hour, so if you are in a rush, you can also skip this and look at the output that we have deposited with the repo (see below).
 
 CEGMA, once installed, or containerized, is simple to run (it has a lot of options that you can explore in your own time) - takes a while though:
 ```bash
@@ -71,7 +94,11 @@ cegma --threads 1 -g data/genome_assembly.fasta
 ```
 While it is running we can skip to the next part and talk about mapping reads to genomes.
 
-Once it's done the thing you want to be looking at is the CEGMA report.
+Once it's done the thing you want to be looking at is the CEGMA report in `output.completeness_report`. A gff file with the genes cegma has predicted can be found at `output.cegma.gff`.
+
+Note that if for some reason you want to skip running CEGMA we have an example output deposited for you as part of this repo at: `data/outputs/cegma/output.completeness_report`.
+
+Let's have a look at the completeness report:
 ```bash
 (user@host)-$ cat output.completeness_report
 ```

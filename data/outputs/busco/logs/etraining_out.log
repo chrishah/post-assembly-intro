@@ -1,0 +1,45 @@
+# Read in 71 genbank sequences.
+Quantiles of the GC contents in the training set:
+0%	0.367
+5%	0.369	10%	0.375
+15%	0.386	20%	0.387
+25%	0.39	30%	0.396
+35%	0.4	40%	0.404
+45%	0.407	50%	0.41
+55%	0.413	60%	0.415
+65%	0.421	70%	0.424
+75%	0.426	80%	0.431
+85%	0.437	90%	0.442
+95%	0.45	100%	0.481
+HMM-training the parameters...
+i= 0 bc= (0.237, 0.263, 0.263, 0.237)
+ ** building model for exons *EXON*
+start codon frequencies: ATG(68)
+# admissible start codons and their probabilities: ATG(1), CTG(0), TTG(0)
+ number of bases in the reading frames: 26622 26690 26690
+--- frame = 0 ---    minPatSum = 233
+--- frame = 1 ---    minPatSum = 233
+--- frame = 2 ---    minPatSum = 233
+--- initial frame = 0 ---    minPatSum = 233
+--- initial frame = 1 ---    minPatSum = 233
+--- initial frame = 2 ---    minPatSum = 233
+--- internal exon terminal frame = 0 ---    minPatSum = 233
+--- internal exon terminal frame = 1 ---    minPatSum = 233
+--- internal exon terminal frame = 2 ---    minPatSum = 233
+single, initial, internal, terminal mean exon lengths :
+1011	218	162	431
+single exon : 14
+initial exon 0 : 28
+initial exon 1 : 15
+initial exon 2 : 11
+internal exon 0 : 65
+internal exon 1 : 61
+internal exon 2 : 71
+terminal exon : 55
+Frequency of stop codons:
+tag:    8 (0.116)
+taa:   35 (0.507)
+tga:   26 (0.377)
+end *EXON*
+Storing parameters to file...
+Writing exon model parameters [1] to file /usr/local/config/species/BUSCO_busco/BUSCO_busco_exon_probs.pbl.

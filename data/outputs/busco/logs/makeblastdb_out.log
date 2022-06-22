@@ -1,0 +1,11 @@
+
+
+Building a new DB, current time: 06/22/2022 10:02:29
+New DB name:   /in/busco/blast_db/genome_assembly.fasta
+New DB title:  /in/data/genome_assembly.fasta
+Sequence type: Nucleotide
+Keep MBits: T
+Maximum file size: 1000000000B
+Adding sequences from FASTA; added 557 sequences in 0.0452499 seconds.
+
+
