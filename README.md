@@ -37,15 +37,13 @@ At this stage you have probably heard about the most common assembly stats for d
 We have a toy genome assembly in your `data/` directory - let's run quast on it.
 
 ```bash
-docker run --rm \
--v $(pwd):/in -w /in \
-reslp/quast:5.0.2 \
-quast.py data/genome_assembly.fasta
+(user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in reslp/quast:5.0.2 \
+               quast.py data/genome_assembly.fasta
 ```
 
 This produces a directory `quast_results` containing the stats. You can have a quick look at those in a simple text file.
 ```bash
-cat quast_results/latest/report.txt
+(user@host)-$ cat quast_results/latest/report.txt
 ```
 Or check out the html version of the report (`quast_results/latest/report.html`) which you can open in your web browser.
 
@@ -64,12 +62,10 @@ Anyway, BUSCO is the 'new kid' (well, not so new any more) and works also very w
 
 Now, let's run BUSCO (will take about 15 minutes):
 ```bash
-(user@host)-$ docker run \
-              --rm -v $(pwd):/in -w /in \
-              ezlabgva/busco:v5.2.1_cv1 \
+(user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in ezlabgva/busco:v5.2.1_cv1 \
               busco -i data/genome_assembly.fasta \
               -o busco -m genome -l eukaryota \
-              -c 1 \
+              -c 2 \
               --augustus --augustus_species schistosoma
 ```
 If you ran BUSCO as above it will have created one directory called `busco` (because you said `-o busco` above). 
@@ -89,10 +85,8 @@ CEGMA, once installed, or containerized, is simple to run (it has a lot of optio
 > The next step (`cegma`) will run for about an hour, so if you are in a rush, you can also skip this and look at the output that we have deposited with the repo (see below).
 
 ```bash
-(user@host)-$ docker run --rm \
--v $(pwd):/in -w /in \
-chrishah/cegma:2.5 \
-cegma --threads 1 -g data/genome_assembly.fasta
+(user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in chrishah/cegma:2.5 \
+               cegma --threads 2 -g data/genome_assembly.fasta
 ```
 While it is running we can skip to the next part and talk about mapping reads to genomes.
 
@@ -111,10 +105,8 @@ Read mapping is covered by many online tutorials, so I'll just show you how it c
 
 First index your genome file.
 ```bash
-(user@host)-$ docker run --rm \
--v $(pwd):/in -w /in \
-reslp/bowtie2:2.3.5 \
-bowtie2-build data/genome_assembly.fasta my_genome.index -q
+(user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in reslp/bowtie2:2.3.5 \
+               bowtie2-build data/genome_assembly.fasta my_genome.index -q
 ```
 Check out which new files have been created.
 ```bash
@@ -123,10 +115,9 @@ Check out which new files have been created.
 
 Then, map the reads to the indexed genome.
 ```bash
-(user@host)-$ docker run --rm \
--v $(pwd):/in -w /in \
-reslp/bowtie2:2.3.5 \
-bowtie2 -1 data/reads.1.fastq.gz -2 data/reads.2.fastq.gz --threads 2 -q --phred33 --fr -x my_genome.index -S my_mapped_reads.sam
+(user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in reslp/bowtie2:2.3.5 \
+               bowtie2 -1 data/reads.1.fastq.gz -2 data/reads.2.fastq.gz \
+               --threads 2 -q --phred33 --fr -x my_genome.index -S my_mapped_reads.sam
 ```
 This has produced a file called `my_mapped_reads.sam`. This is simple text file formatted in [sam](https://samtools.github.io/hts-specs/SAMv1.pdf) format, that contains information on where in the genome certain reads mapped (if at all).
 
@@ -138,10 +129,8 @@ Since SAM is just a text file and for large amounts of data these files may get 
 
 The next step will be to convert the SAM to a BAM file.
 ```bash
-(user@host)-$ docker run --rm \
--v $(pwd):/in -w /in \
-reslp/samtools:1.9 \
-samtools view -bS my_mapped_reads.sam -o my_mapped_reads.bam -@ 2
+(user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in reslp/samtools:1.9 \
+               samtools view -bS my_mapped_reads.sam -o my_mapped_reads.bam -@ 2
 ```
 
 Check out the size of the newest file `my_mapped_reads.bam` as compared to the original SAM file. Note that we have not lost any information - we have just compressed the data.
@@ -151,26 +140,22 @@ Check out the size of the newest file `my_mapped_reads.bam` as compared to the o
 
 Two more steps that are usually being done are sorting and indexing the bam file - this is the convention, and what most downstream tools expect.
 ```bash
-(user@host)-$ docker run --rm \
--v $(pwd):/in -w /in \
-reslp/samtools:1.9 \
-samtools sort -o my_mapped_reads.sorted.bam my_mapped_reads.bam -@ 2
+(user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in reslp/samtools:1.9 \
+               samtools sort -o my_mapped_reads.sorted.bam my_mapped_reads.bam -@ 2
 
-(user@host)-$ docker run --rm \
--v $(pwd):/in -w /in \
-reslp/samtools:1.9 \
-samtools index my_mapped_reads.sorted.bam -@ 2
+(user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in reslp/samtools:1.9 \
+               samtools index my_mapped_reads.sorted.bam -@ 2
 
 ```
 
 A common step that I want to at least mention is the removal of duplicates. [Picard](https://broadinstitute.github.io/picard/) offers a good option there.
 
 ```bash
-(user@host)-$ docker run --rm \
--v $(pwd):/in -w /in \
-broadinstitute/picard:2.20.6 \
-java -jar /usr/picard/picard.jar MarkDuplicates \
-INPUT=my_mapped_reads.sorted.bam OUTPUT=my_mapped_reads.sorted.duprmvd.bam METRICS_FILE=my_mapped_reads.sorted.duprmvd.metrics REMOVE_DUPLICATES=true ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=1000
+(user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in broadinstitute/picard:2.20.6 \
+               java -jar /usr/picard/picard.jar MarkDuplicates \
+               INPUT=my_mapped_reads.sorted.bam OUTPUT=my_mapped_reads.sorted.duprmvd.bam \
+               METRICS_FILE=my_mapped_reads.sorted.duprmvd.metrics REMOVE_DUPLICATES=true \
+               ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=1000
 ```
 
 I encourage you to inspect the assembly and reads mapping to it visually. A possible tools is the Integrative Genomics Viewer [igv](https://software.broadinstitute.org/software/igv/). You can install it at some point, but for now we're going to use through a webapp - go [here](https://igv.org/app/).
@@ -178,10 +163,8 @@ I encourage you to inspect the assembly and reads mapping to it visually. A poss
 First we need to index our reference genome.
 Index the genome for viewing.
 ```bash
-(user@host)-$ docker run --rm \
--v $(pwd):/in -w /in \
-reslp/samtools:1.9 \
-samtools faidx data/genome_assembly.fasta
+(user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in reslp/samtools:1.9 \
+               samtools faidx data/genome_assembly.fasta
 ```
 
 If you followed until here you're going to need the following files downloaded locally:
@@ -212,20 +195,14 @@ Blobtools can extract coverage information from bam files (gladly we made one ab
 
 Blobtools needs to be run in three steps - do consult the manual on the Blobtools [webpage](https://blobtools.readme.io/docs) to get more info on what the individual steps are doing.
 ```bash
-(user@host)-$ docker run --rm \
--v $(pwd):/in -w /in \
-chrishah/blobtools:v1.1.1 \
-blobtools create -i data/genome_assembly.fasta -y spades -o blobtools_spades
+(user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in chrishah/blobtools:v1.1.1 \
+               blobtools create -i data/genome_assembly.fasta -y spades -o blobtools_spades
 
-(user@host)-$ docker run --rm \
--v $(pwd):/in -w /in \
-chrishah/blobtools:v1.1.1 \
-blobtools view -i blobtools_spades.blobDB.json
+(user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in chrishah/blobtools:v1.1.1 \
+               blobtools view -i blobtools_spades.blobDB.json
 
-(user@host)-$ docker run --rm \
--v $(pwd):/in -w /in \
-chrishah/blobtools:v1.1.1 \
-blobtools plot -i blobtools_spades.blobDB.json
+(user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in chrishah/blobtools:v1.1.1 \
+               blobtools plot -i blobtools_spades.blobDB.json
 ```
 
 The file you want to look at first of all is: `blobtools_spades.blobDB.json.bestsum.phylum.p8.span.100.blobplot.spades.png`, but there is lots more to explore on your own.
@@ -233,20 +210,14 @@ The file you want to look at first of all is: `blobtools_spades.blobDB.json.best
 Now, let's assume you hadn't used SPAdes as your assembler, you can still use blobtools, but in this case you need to give the coverage information in a different way, e.g. a bam file.
 
 ```bash
-(user@host)-$ docker run --rm \
--v $(pwd):/in -w /in \
-chrishah/blobtools:v1.1.1 \
-blobtools create -i data/genome_assembly.fasta -b my_mapped_reads.sorted.bam -o blobtools_bam
+(user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in chrishah/blobtools:v1.1.1 \
+               blobtools create -i data/genome_assembly.fasta -b my_mapped_reads.sorted.bam -o blobtools_bam
 
-(user@host)-$ docker run --rm \
--v $(pwd):/in -w /in \
-chrishah/blobtools:v1.1.1 \
-blobtools view -i blobtools_bam.blobDB.json
+(user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in chrishah/blobtools:v1.1.1 \
+               blobtools view -i blobtools_bam.blobDB.json
 
-(user@host)-$ docker run --rm \
--v $(pwd):/in -w /in \
-chrishah/blobtools:v1.1.1 \
-blobtools plot -i blobtools_bam.blobDB.json
+(user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in chrishah/blobtools:v1.1.1 \
+               blobtools plot -i blobtools_bam.blobDB.json
 
 ```
 Checkout `blobtools_bam.blobDB.json.bestsum.phylum.p8.span.100.blobplot.bam0.png` and `blobtools_bam.blobDB.json.bestsum.phylum.p8.span.100.blobplot.read_cov.bam0.png` - there shouldn't be much difference to the first result.
@@ -272,14 +243,14 @@ Then, you would use BLAST to compare your genome against the database - the blob
 (user@host)-$ ASSEMBLY=data/genome_assembly.fasta
 (user@host)-$ DB=db/nt
 (user@host)-$ blastn \
- -query $ASSEMBLY \
- -db $DB \
- -outfmt "6 qseqid staxids bitscore std" \
- -max_target_seqs 1 \
- -max_hsps 1 \
- -evalue 1e-25 \
- -num_threads 10 \
- -out blastn.fmt6.out.txt
+               -query $ASSEMBLY \
+               -db $DB \
+               -outfmt "6 qseqid staxids bitscore std" \
+               -max_target_seqs 1 \
+               -max_hsps 1 \
+               -evalue 1e-25 \
+               -num_threads 10 \
+               -out blastn.fmt6.out.txt
 ```
 
 ***continue here, as part of the course***
@@ -299,21 +270,15 @@ Now, try to give this additional info to blobtools. Last thing you need is a so 
 From this you get a file `nodes.dmp` and a `names.dmp` file - these you need in the next step.
 
 ```bash
-(user@host)-$ docker run --rm \
--v $(pwd):/in -w /in \
-chrishah/blobtools:v1.1.1 \
-blobtools create -i data/genome_assembly.fasta -b my_mapped_reads.sorted.bam \
---nodes nodes.dmp --names names.dmp --hitsfile data/blastn.fmt6.out.txt -o blobtools_tax
+(user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in chrishah/blobtools:v1.1.1 \
+               blobtools create -i data/genome_assembly.fasta -b my_mapped_reads.sorted.bam \
+               --nodes nodes.dmp --names names.dmp --hitsfile data/blastn.fmt6.out.txt -o blobtools_tax
 
-(user@host)-$ docker run --rm \
--v $(pwd):/in -w /in \
-chrishah/blobtools:v1.1.1 \
-blobtools view -i blobtools_tax.blobDB.json
+(user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in chrishah/blobtools:v1.1.1 \
+               blobtools view -i blobtools_tax.blobDB.json
 
-(user@host)-$ docker run --rm \
--v $(pwd):/in -w /in \
-chrishah/blobtools:v1.1.1 \
-blobtools plot -i blobtools_tax.blobDB.json
+(user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in chrishah/blobtools:v1.1.1 \
+               blobtools plot -i blobtools_tax.blobDB.json
 
 ```
 
@@ -334,10 +299,9 @@ First get all contig/scaffold ids that were classified as Chordata.
 
 Then, use another tool from the blobtools suite (see [here](https://blobtools.readme.io/docs/bamfilter)) to extract the relevant reads from the original bam file.
 ```bash
-(user@host)-$ docker run --rm \
--v $(pwd):/in -w /in \
-chrishah/blobtools:v1.1.1 \
-blobtools bamfilter -b my_mapped_reads.sorted.bam -i Chordata.list.txt --read_format fq --noninterleaved -o reads_Chordata
+(user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in chrishah/blobtools:v1.1.1 \
+               blobtools bamfilter -b my_mapped_reads.sorted.bam -i Chordata.list.txt \
+               --read_format fq --noninterleaved -o reads_Chordata
 ```
 
 Thanks for joining us today!
