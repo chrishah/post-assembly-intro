@@ -275,7 +275,7 @@ From this you get a file `nodes.dmp` and a `names.dmp` file - these you need in 
 
 ```bash
 (user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in chrishah/blobtools:v1.1.1 \
-               blobtools create -i data/genome_assembly.fasta -b my_mapped_reads.sorted.bam \
+               blobtools create -i data/genome_assembly.fasta -y spades \
                --nodes nodes.dmp --names names.dmp --hitsfile data/blastn.fmt6.out.txt -o blobtools_tax
 
 (user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in chrishah/blobtools:v1.1.1 \
