@@ -178,7 +178,11 @@ In the web [app](https://igv.org/app/), go *Genome->Local File->*, then make sur
 Now, to get the reads visible, go to *Tracks->Local File* and select `my_mapped_reads.sorted.bam` and `my_mapped_reads.sorted.bam.bai` again at the same time before clicking *Open*.
 
 ***ATTENTION***
-> Note that not all contigs will have reads mapping to it, because this is a reduced set of reads. You can select for example conig `NODE_288_length_24172_cov_71.622494` in IGV for exploration.
+> Note that most of the contigs will not have reads mapping to it, because this is a reduced set of reads. Please use the search function in IGV to find `NODE_19055_length_5183_cov_61.240306` for exploration.
+
+
+***Optional***
+> IGV allows to also load GFF files, containing information on genome annotation. If you want to try that you can download the file `data/outputs/cegma/output.cegma.gff` and add it as another track in IGV.
 
 
 Enjoy!
