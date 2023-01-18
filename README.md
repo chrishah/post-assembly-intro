@@ -62,7 +62,7 @@ Anyway, BUSCO is the 'new kid' (well, not so new any more) and works also very w
 
 Now, let's run BUSCO (will take about 15 minutes):
 ```bash
-(user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in ezlabgva/busco:v5.2.1_cv1 \
+(user@host)-$ docker run --rm -v $(pwd):/in -w /in ezlabgva/busco:v5.2.1_cv1 \
               busco -i data/genome_assembly.fasta \
               -o busco -m genome -l eukaryota \
               -c 2 \
