@@ -45,7 +45,7 @@ This produces a directory `quast_results` containing the stats. You can have a q
 ```bash
 (user@host)-$ cat quast_results/latest/report.txt
 ```
-Or check out the html version of the report (`quast_results/latest/report.html`) which you can open in your web browser.
+Or check out the html version of the report (`quast_results/latest/report.html`) which you can open in your web browser. If you are working on a remote server, you'll have to download the html to your local computer first.
 
 Quast gives a whole lot of other useful things but for these I refer you to the quast [homepage](http://quast.sourceforge.net/quast). 
 
@@ -65,12 +65,24 @@ Now, let's run BUSCO (will take about 15 minutes):
 (user@host)-$ docker run --rm -v $(pwd):/in -w /in ezlabgva/busco:v5.2.1_cv1 \
               busco -i data/genome_assembly.fasta \
               -o busco -m genome -l eukaryota \
-              -c 2 \
+              -c 2 -f \
               --augustus --augustus_species schistosoma
 ```
-If you ran BUSCO as above it will have created one directory called `busco` (because you said `-o busco` above). 
+While it is running, feel free to open a new terminal window and already start exploring the outputs that we have precomputed for you in `data/outputs/busco/`.
 
-A detailed exlanation of the parameters and the BUSCO output you can also find as part of a different [session](https://github.com/chrishah/phylogenomics-intro).
+If you ran BUSCO as above it will have created one directory called `busco` (because you said `-o busco` above). Note that if you run it a second time, it will complain and
+
+A few words on the parameters used:
+ - `-i` - input fasta file
+ - `-o` - a string that will determine the name of the output directory BUSCO will write to
+ - `-m` - run mode 'genome'; there also is 'transcriptome' and 'protein'
+ - `-l` - BUSCO provides sets of reference genes at particular taxonomic levels - see [here](https://busco-data.ezlab.org/v5/data/lineages/) for a full list.
+ - `-c` - use this number of CPUs
+ - `-f` - force overwrite results from previous run - if you had used the same name before
+ - `--augustus --augustus_species` - this part specifies that we want to use a particular version of the algorithm that internally uses a software called `augustus` in the process of gene identification - this can be omitted completely in version 5 of BUSCO, then another approach `metaeuk` will be used.
+
+A detailed explanation of the parameters can be found on the BUSCO [webpage](https://busco.ezlab.org/) and we're also using BUSCO as part of different training sessions (for example [this](https://github.com/chrishah/phylogenomics-intro) or [this](https://github.com/chrishah/phylogenomics_intro_vertebrata)).
+
 
 Usually, the most relevant files are:
  - `busco/run_eukaryota_odb10/short_summary.txt`
@@ -92,11 +104,14 @@ While it is running we can skip to the next part and talk about mapping reads to
 
 Once it's done the thing you want to be looking at is the CEGMA report in `output.completeness_report`. A gff file with the genes cegma has predicted can be found at `output.cegma.gff`.
 
-Note that if for some reason you want to skip running CEGMA we have an example output deposited for you as part of this repo at: `data/outputs/cegma/output.completeness_report`.
+Note that if for some reason you want to skip running CEGMA we have an example output deposited for you as part of this repo at: 
+ - `data/outputs/cegma/output.completeness_report`
+ - `data/outputs/cegma/output.cegma.gff`
 
 Let's have a look at the completeness report:
 ```bash
-(user@host)-$ cat output.completeness_report
+(user@host)-$ cat data/outputs/cegma/output.completeness_report #look at the precomputed results
+(user@host)-$ cat output.completeness_report #if you ran yourself
 ```
 
 __3.) Mapping reads to genomes__
