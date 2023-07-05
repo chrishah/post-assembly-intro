@@ -245,7 +245,7 @@ Now, let's assume you hadn't used SPAdes as your assembler, you can still use bl
                blobtools plot -i blobtools_bam.blobDB.json
 
 ```
-Checkout `blobtools_bam.blobDB.json.bestsum.phylum.p8.span.100.blobplot.bam0.png` and `blobtools_bam.blobDB.json.bestsum.phylum.p8.span.100.blobplot.read_cov.bam0.png` - there shouldn't be much difference to the first result.
+Checkout `blobtools_bam.blobDB.json.bestsum.phylum.p8.span.100.blobplot.bam0.png` - there shouldn't be much difference to the previous result. The second result is derived based on actual mapping results, so actually mapped reads and since I have not given you the full readset there is some differences with respect to the y-axis (coverage). The main purpose of this exercise is to demonstrate how to use blobtools if the genome you are working with had not been made with one of the supported assemblers.
 
 Finally, one of the nicest features of blobtools is that the visualizations can be taxonomically annotated - see [here](https://blobtools.readme.io/docs/taxonomic-annotation). What you'll need is a so-called 'hits files'. This is essentially a text files obtained via comparing the assembly against a reference database using `blast` or other tools - see [here](https://blobtools.readme.io/docs/taxonomy-file).
 
@@ -258,7 +258,7 @@ So, for completeness sake, you could download the entire `nt` database and decom
 ```bash
 (user@host)-$ mkdir db
 (user@host)-$ cd db
-(user@host)-$ wget "ftp://ftp.ncbi.nlm.nih.gov/blast/db/nt.??.tar.gz"
+(user@host)-$ wget "ftp://ftp.ncbi.nlm.nih.gov/blast/db/nt.*.tar.gz"
 (user@host)-$ for a in nt.*.tar.gz; do tar xzf $a; done
 (user@host)-$ cd ..
 ```
@@ -281,7 +281,7 @@ Then, you would use BLAST to compare your genome against the database - the blob
 ***continue here, as part of the course***
 
 
-An example file comes with the repository - check it out.
+An example hits file as obtained through the blast search above comes with the repository - check it out.
 ```bash
 (user@host)-$ cat data/blastn.fmt6.out.txt
 ```
@@ -309,7 +309,6 @@ From this you get a file `nodes.dmp` and a `names.dmp` file - these you need in 
 
 What you want to look at initially is:
  - `blobtools_tax.blobDB.json.bestsum.phylum.p8.span.100.blobplot.bam0.png`
- - `blobtools_tax.blobDB.json.bestsum.phylum.p8.span.100.blobplot.read_cov.bam0.png`
 
 Nice, no?
 
