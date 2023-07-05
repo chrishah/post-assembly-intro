@@ -314,14 +314,17 @@ Nice, no?
 
 Now what to do with this info?
 
-You could for example take all reads that contributed to contigs that were classified as 'Chordata', and reassemble them, if that happens to be your target.
+You could for example take all reads that contributed to contigs that were classified as 'Chordata', and reassemble them, if that happens to be your target. Blobtools brings all the information it gathered throughout the process together in text file. Have a look.
+```bash
+(user@host)-$ less blobtools_tax.blobDB.table.txt
+```
 
-First get all contig/scaffold ids that were classified as Chordata.
+We could get all contig/scaffold ids that were classified as Chordata and write this list to a new file.
 ```bash
 (user@host)-$ grep "Chordata" blobtools_tax.blobDB.table.txt | cut -f 1 > Chordata.list.txt
 ```
 
-Then, use another tool from the blobtools suite (see [here](https://blobtools.readme.io/docs/bamfilter)) to extract the relevant reads from the original bam file.
+Then, use another tool from the blobtools suite (see [here](https://blobtools.readme.io/docs/bamfilter)) to extract the relevant reads from the original bam file. Note that if you did not run all commands above you can still try the below by adjusting the paths to the input files to point to the precomputed results in `data/outputs/read_mapping/my_mapped_reads.sorted.bam`
 ```bash
 (user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in chrishah/blobtools:v1.1.1 \
                blobtools bamfilter -b my_mapped_reads.sorted.bam -i Chordata.list.txt \
