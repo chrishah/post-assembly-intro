@@ -199,7 +199,7 @@ Now, to get the reads visible, go to *Tracks->Local File* and select `my_mapped_
 
 
 ***Optional***
-> IGV allows to also load GFF files, containing information on genome annotation. If you want to try that you can download the file `data/outputs/cegma/output.cegma.gff` and add it as another track in IGV.
+> IGV allows to also load GFF files, containing information on genome annotation. If you want to try that you can download the file `data/outputs/cegma/output.cegma.gff` and add it as another track in IGV. If you do you'll see that CEGMA predicted a gene on the contig `NODE_19055_length_5183_cov_61.240306`.
 
 
 Enjoy!
