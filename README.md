@@ -110,8 +110,8 @@ Note that if for some reason you want to skip running CEGMA we have an example o
 
 Let's have a look at the completeness report:
 ```bash
-(user@host)-$ cat data/outputs/cegma/output.completeness_report #look at the precomputed results
-(user@host)-$ cat output.completeness_report #if you ran yourself
+(user@host)-$ head -n 30 data/outputs/cegma/output.completeness_report #look at the precomputed results
+(user@host)-$ head -n 30 output.completeness_report #if you ran yourself
 ```
 
 __3.) Mapping reads to genomes__
@@ -128,7 +128,7 @@ Check out which new files have been created.
 (user@host)-$ ls -hlrt
 ```
 
-Then, map the reads to the indexed genome.
+Then, map the reads to the indexed genome (this will take a minute or so with nothing happening apparently on your screen - be patient).
 ```bash
 (user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in reslp/bowtie2:2.3.5 \
                bowtie2 -1 data/reads.1.fastq.gz -2 data/reads.2.fastq.gz \
@@ -173,7 +173,7 @@ A common step that I want to at least mention is the removal of duplicates. [Pic
                ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=1000
 ```
 
-I encourage you to inspect the assembly and reads mapping to it visually. A possible tools is the Integrative Genomics Viewer [igv](https://software.broadinstitute.org/software/igv/). You can install it at some point, but for now we're going to use through a webapp - go [here](https://igv.org/app/).
+I encourage you to inspect the assembly and reads mapping to it visually. A possible tool is the Integrative Genomics Viewer [igv](https://software.broadinstitute.org/software/igv/). You can install it at some point, but for now we're going to use through a webapp - go [here](https://igv.org/app/). Another stand alone program you can explore later is [Tablet](https://ics.hutton.ac.uk/tablet/).
 
 First we need to index our reference genome.
 Index the genome for viewing.
@@ -183,10 +183,12 @@ Index the genome for viewing.
 ```
 
 If you followed until here you're going to need the following files downloaded locally:
- - `data/genome_assembly.fasta` (came with the repo)
- - `data/genome_assembly.fasta.fai` (index prodcued in the last step above)
- - `my_mapped_reads.sorted.bam` (sorted bam file from above)
- - `my_mapped_reads.sorted.bam.bai` (index of sorted bam file from above)
+ - `data/genome_assembly.fasta` (genome fasta; came with the repo)
+ - `data/genome_assembly.fasta.fai` (index produced in the last step above)
+ - `my_mapped_reads.sorted.bam` (sorted bam file from above) - alternative: `data/outputs/read_mapping/my_mapped_reads.sorted.bam` if you haven't run yourself
+ - `my_mapped_reads.sorted.bam.bai` (index of sorted bam file from above) - alternative `data/outputs/read_mapping/my_mapped_reads.sorted.bam.bai` if you haven't run yourself
+
+
 
 In the web [app](https://igv.org/app/), go *Genome->Local File->*, then make sure to select both files, so `genome_assembly.fasta` together with `genome_assembly.fasta.fai`.
 
