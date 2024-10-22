@@ -102,16 +102,16 @@ So, we can __either__ run it via `Docker`:
 
 ```bash
 (user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in huangnengcsu/compleasm:v0.2.6 \
-		compleasm run \
-		-a /in/data/genome_assembly.fasta -l eukaryota -o compleasm -t 2
+                compleasm run \
+                -a /in/data/genome_assembly.fasta -l eukaryota -o compleasm -t 2
 ```
 
 .. __or__ via `Singularity`:
 
 ```bash
 (user@host)-$ singularity exec docker://huangnengcsu/compleasm:v0.2.6 \
-		compleasm run \
-		-a data/genome_assembly.fasta -l eukaryota -o compleasm -t 2
+                compleasm run \
+                -a data/genome_assembly.fasta -l eukaryota -o compleasm -t 2
 ```
 
 While this is running (you'd need to open a new terminal window to do this), or in case you don't want to run at this stage, we can look at the outputs that `compleasm` produces. Example results ship with the repository:
