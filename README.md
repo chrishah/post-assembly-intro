@@ -94,6 +94,14 @@ Usually, the most relevant files are:
 and fasta files in the directory:
  - `busco/run_eukaryota_odb10/busco_sequences/`
 
+
+If you want to know which reference sets are available `busco` also has an option to list those (note how I use `singularity` to call it now):
+
+```bash
+(user@host)-$ singularity exec docker://ezlabgva/busco:v5.2.1_cv1 busco --list-datasets
+```
+
+
 __2b.) compleasm__
 
 A very recent addition to these kind of evaluation tools is `compleasm` and it claims to be '_a faster and more accurate reimplementation of BUSCO_'. Let's see. In this case the developers already provide us with a Docker image. As discussed (hopefully) this could be used via `Docker` or `Singularity`/`Apptainer`.
