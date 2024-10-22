@@ -55,6 +55,7 @@ The idea here is that there exists a set of conserved genes that are expected to
 
 There are currently two tools available:
  - [BUSCO](https://busco.ezlab.org/)
+ - [compleasm](https://github.com/passdan/BioinformaticiansToolbox/blob/main/NGS_QualityControl.md)
  - [CEGMA](http://korflab.ucdavis.edu/datasets/cegma/)
 
 The latter is unfortunately not maintained any more (some [history](http://www.acgt.me/blog/2015/5/18/goodbye-cegma-hello-busco)), but it can still be used if you can get it installed on your system. I have made a docker container for it, since I am planning to keep using it - see [here](https://hub.docker.com/r/chrishah/cegma).
