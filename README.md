@@ -55,11 +55,13 @@ The idea here is that there exists a set of conserved genes that are expected to
 
 There are currently two tools available:
  - [BUSCO](https://busco.ezlab.org/)
- - [compleasm](https://github.com/passdan/BioinformaticiansToolbox/blob/main/NGS_QualityControl.md)
+ - [compleasm](https://github.com/huangnengCSU/compleasm)
  - [CEGMA](http://korflab.ucdavis.edu/datasets/cegma/)
 
 The latter is unfortunately not maintained any more (some [history](http://www.acgt.me/blog/2015/5/18/goodbye-cegma-hello-busco)), but it can still be used if you can get it installed on your system. I have made a docker container for it, since I am planning to keep using it - see [here](https://hub.docker.com/r/chrishah/cegma).
 Anyway, BUSCO is the 'new kid' (well, not so new any more) and works also very well. 
+
+__2a.) BUSCO__
 
 Now, let's run BUSCO (will take about 15 minutes):
 ```bash
@@ -91,6 +93,35 @@ Usually, the most relevant files are:
 
 and fasta files in the directory:
  - `busco/run_eukaryota_odb10/busco_sequences/`
+
+__2b.) compleasm__
+
+A very recent addition to these kind of evaluation tools is `compleasm` and it claims to be '_a faster and more accurate reimplementation of BUSCO_'. Let's see. In this case the developers already provide us with a Docker image. As discussed (hopefully) this could be used via `Docker` or `Singularity`/`Apptainer`.
+
+So, we can __either__ run it via `Docker`:
+
+```bash
+(user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in huangnengcsu/compleasm:v0.2.6 \
+		compleasm run \
+		-a /in/data/genome_assembly.fasta -l eukaryota -o compleasm -t 2
+```
+
+.. __or__ via `Singularity`:
+
+```bash
+(user@host)-$ singularity exec docker://huangnengcsu/compleasm:v0.2.6 \
+		compleasm run \
+		-a data/genome_assembly.fasta -l eukaryota -o compleasm -t 2
+```
+
+While this is running (you'd need to open a new terminal window to do this), or in case you don't want to run at this stage, we can look at the outputs that `compleasm` produces. Example results ship with the repository:
+
+```bash
+(user@host)-$ ls data/outputs/compleasm/
+```
+
+
+__2c.) CEGMA__
 
 CEGMA, once installed, or containerized, is simple to run (it has a lot of options that you can explore in your own time) - takes a while though:
 

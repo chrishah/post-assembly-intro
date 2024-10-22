@@ -1,0 +1,13 @@
+#                                                                            --- full sequence --- -------------- this domain -------------   hmm coord   ali coord   env coord
+# target name        accession   tlen query name           accession   qlen   E-value  score  bias   #  of  c-Evalue  i-Evalue  score  bias  from    to  from    to  from    to  acc description of target
+#------------------- ---------- ----- -------------------- ---------- ----- --------- ------ ----- --- --- --------- --------- ------ ----- ----- ----- ----- ----- ----- ----- ---- ---------------------
+#
+# Program:         hmmsearch
+# Version:         3.1b2 (February 2015)
+# Pipeline mode:   SEARCH
+# Query file:      mb_downloads/eukaryota_odb10/hmms/865202at2759.hmm
+# Target file:     -
+# Option settings: /opt/conda/envs/compleasm/bin/hmmsearch --domtblout compleasm/eukaryota_odb10/hmmer_output/865202at2759.out --cpu 1 mb_downloads/eukaryota_odb10/hmms/865202at2759.hmm - 
+# Current dir:     /in
+# Date:            Tue Oct 22 12:37:35 2024
+# [ok]

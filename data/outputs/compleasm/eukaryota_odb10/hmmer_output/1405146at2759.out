@@ -1,0 +1,14 @@
+#                                                                                                                                 --- full sequence --- -------------- this domain -------------   hmm coord   ali coord   env coord
+# target name                                                             accession   tlen query name           accession   qlen   E-value  score  bias   #  of  c-Evalue  i-Evalue  score  bias  from    to  from    to  from    to  acc description of target
+#                                                     ------------------- ---------- ----- -------------------- ---------- ----- --------- ------ ----- --- --- --------- --------- ------ ----- ----- ----- ----- ----- ----- ----- ---- ---------------------
+1405146at2759_590646_1:000eb3|NODE_20_length_76873_cov_5.638132:5066-5225 -             54 1405146at2759        -            133   1.5e-05   12.8   0.0   1   1   4.9e-06   1.5e-05   12.8   0.0    80    98     1    19     1    45 0.83 -
+#
+# Program:         hmmsearch
+# Version:         3.1b2 (February 2015)
+# Pipeline mode:   SEARCH
+# Query file:      mb_downloads/eukaryota_odb10/hmms/1405146at2759.hmm
+# Target file:     -
+# Option settings: /opt/conda/envs/compleasm/bin/hmmsearch --domtblout compleasm/eukaryota_odb10/hmmer_output/1405146at2759.out --cpu 1 mb_downloads/eukaryota_odb10/hmms/1405146at2759.hmm - 
+# Current dir:     /in
+# Date:            Tue Oct 22 12:39:02 2024
+# [ok]

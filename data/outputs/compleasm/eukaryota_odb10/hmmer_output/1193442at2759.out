@@ -1,0 +1,17 @@
+#                                                                                                                                  --- full sequence --- -------------- this domain -------------   hmm coord   ali coord   env coord
+# target name                                                              accession   tlen query name           accession   qlen   E-value  score  bias   #  of  c-Evalue  i-Evalue  score  bias  from    to  from    to  from    to  acc description of target
+#                                                      ------------------- ---------- ----- -------------------- ---------- ----- --------- ------ ----- --- --- --------- --------- ------ ----- ----- ----- ----- ----- ----- ----- ---- ---------------------
+1193442at2759_6185_0:0006ed|NODE_1520_length_12624_cov_64.953614:2525-3620 -            366 1193442at2759        -            264   9.8e-58  185.2   0.0   1   1   6.2e-58   1.9e-57  184.2   0.0    20   259    83   344    74   348 0.89 -
+1193442at2759_6183_0:001745|NODE_1520_length_12624_cov_64.953614:2489-3620 -            378 1193442at2759        -            264   1.1e-57  185.0   0.0   1   1   6.9e-58   2.1e-57  184.1   0.0    20   259    95   356    86   360 0.89 -
+1193442at2759_6210_0:001141|NODE_1520_length_12624_cov_64.953614:2489-3629 -            380 1193442at2759        -            264   1.1e-57  185.0   0.0   1   1     7e-58   2.1e-57  184.1   0.0    20   259    95   356    86   360 0.89 -
+1193442at2759_6198_0:001bf9|NODE_1520_length_12624_cov_64.953614:3065-3614 -            184 1193442at2759        -            264   1.5e-37  119.0   1.0   1   1   9.5e-38   2.9e-37  118.1   1.0   112   259     1   164     1   168 0.91 -
+#
+# Program:         hmmsearch
+# Version:         3.1b2 (February 2015)
+# Pipeline mode:   SEARCH
+# Query file:      mb_downloads/eukaryota_odb10/hmms/1193442at2759.hmm
+# Target file:     -
+# Option settings: /opt/conda/envs/compleasm/bin/hmmsearch --domtblout compleasm/eukaryota_odb10/hmmer_output/1193442at2759.out --cpu 1 mb_downloads/eukaryota_odb10/hmms/1193442at2759.hmm - 
+# Current dir:     /in
+# Date:            Tue Oct 22 12:39:58 2024
+# [ok]

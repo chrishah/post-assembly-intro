@@ -1,0 +1,256 @@
+# Busco id	Status	Sequence	Gene Start	Gene End	Strand	Score	Length	OrthoDB url	Description
+1001705at2759	Complete	NODE_11820_length_6199_cov_57.914244	2032	2986	-	863	200	https://v10-1.orthodb.org/?query=1001705at2759	WD40 repeat
+100698at2759	Complete	NODE_1142_length_14151_cov_67.063521	5582	10851	+	1368	380	https://v10-1.orthodb.org/?query=100698at2759	Helicase, C-terminal
+1010730at2759	Complete	NODE_655_length_17641_cov_61.235026	3033	4922	-	495	243	https://v10-1.orthodb.org/?query=1010730at2759	Winged helix-like DNA-binding domain superfamily
+1018517at2759	Complete	NODE_159_length_29535_cov_63.670853	22973	23822	-	476	180	https://v10-1.orthodb.org/?query=1018517at2759	Tetrapyrrole methylase
+1019762at2759	Complete	NODE_83_length_36217_cov_70.776868	3943	7133	-	708	381	https://v10-1.orthodb.org/?query=1019762at2759	Signal recognition particle subunit SRP68
+1030907at2759	Complete	NODE_65_length_38452_cov_67.054827	18538	19477	+	502	272	https://v10-1.orthodb.org/?query=1030907at2759	Golgi to ER traffic protein 4
+1049599at2759	Complete	NODE_157_length_29729_cov_69.848138	21255	22936	+	1072	282	https://v10-1.orthodb.org/?query=1049599at2759	WD40-repeat-containing domain
+1051021at2759	Complete	NODE_11997_length_6167_cov_80.116256	3022	5005	-	692	276	https://v10-1.orthodb.org/?query=1051021at2759	ALG11 mannosyltransferase
+1057950at2759	Complete	NODE_89_length_35462_cov_85.283934	16982	18218	+	612	225	https://v10-1.orthodb.org/?query=1057950at2759	MEMO1 family
+1079827at2759	Complete	NODE_412_length_20887_cov_73.445123	16309	17228	+	845	223	https://v10-1.orthodb.org/?query=1079827at2759	Ribosomal biogenesis NSA2 family
+1087488at2759	Complete	NODE_745_length_16838_cov_77.734741	11501	12985	+	958	284	https://v10-1.orthodb.org/?query=1087488at2759	CTLH, C-terminal LisH motif
+1094121at2759	Complete	NODE_1128_length_14200_cov_66.098704	10057	10593	+	390	133	https://v10-1.orthodb.org/?query=1094121at2759	ESCRT-II complex, Vps25 subunit
+1107630at2759	Complete	NODE_12257_length_6121_cov_73.192422	4252	5459	+	598	208	https://v10-1.orthodb.org/?query=1107630at2759	Dolichyl-phosphate beta-glucosyltransferase
+1108845at2759	Complete	NODE_3072_length_9842_cov_64.244547	5799	7005	-	1456	331	https://v10-1.orthodb.org/?query=1108845at2759	COP9 signalosome complex subunit 2
+1115196at2759	Complete	NODE_1558_length_12480_cov_72.528340	1025	2608	-	642	276	https://v10-1.orthodb.org/?query=1115196at2759	Ferrodoxin-fold anticodon-binding domain
+1138059at2759	Complete	NODE_101_length_33679_cov_74.323403	12425	13367	+	808	206	https://v10-1.orthodb.org/?query=1138059at2759	Methyltransferase type 11
+1161199at2759	Complete	NODE_6691_length_7544_cov_71.743538	6072	7065	+	483	142	https://v10-1.orthodb.org/?query=1161199at2759	Coatomer subunit epsilon
+1178688at2759	Complete	NODE_1185_length_13996_cov_68.076442	9673	10339	-	485	138	https://v10-1.orthodb.org/?query=1178688at2759	ATPase, OSCP/delta subunit
+1182451at2759	Complete	NODE_3797_length_9181_cov_61.924868	5081	6033	+	256	128	https://v10-1.orthodb.org/?query=1182451at2759	SNARE
+1193442at2759	Complete	NODE_1520_length_12624_cov_64.953614	2525	3620	+	949	239	https://v10-1.orthodb.org/?query=1193442at2759	Bystin
+1194691at2759	Fragmented	NODE_18305_length_5266_cov_63.978994	3291	4075	+	476	154	https://v10-1.orthodb.org/?query=1194691at2759	26S Proteasome non-ATPase regulatory subunit 6
+1194797at2759	Complete	NODE_752_length_16796_cov_85.421736	5733	7743	+	699	429	https://v10-1.orthodb.org/?query=1194797at2759	Eukaryotic translation initiation factor 3 subunit B
+1220881at2759	Complete	NODE_216_length_26714_cov_73.083230	11125	12248	+	401	145	https://v10-1.orthodb.org/?query=1220881at2759	TFIIH subunit Tfb4/GTF2H3
+1222562at2759	Complete	NODE_386_length_21367_cov_82.501174	19286	19751	+	441	117	https://v10-1.orthodb.org/?query=1222562at2759	Ribosome biogenesis protein
+1228942at2759	Complete	NODE_369_length_21657_cov_125.604310	16322	16931	-	452	163	https://v10-1.orthodb.org/?query=1228942at2759	Proteasome subunit beta
+1248958at2759	Complete	NODE_588_length_18424_cov_72.082793	9443	14540	-	1455	600	https://v10-1.orthodb.org/?query=1248958at2759	Exportin-2, central domain
+1258856at2759	Complete	NODE_121_length_32037_cov_71.518210	25312	28459	-	1340	509	https://v10-1.orthodb.org/?query=1258856at2759	Vps16, C-terminal
+1259741at2759	Complete	NODE_2055_length_11285_cov_73.690757	8799	9718	+	806	218	https://v10-1.orthodb.org/?query=1259741at2759	GPI-anchor transamidase
+1266231at2759	Complete	NODE_94_length_34700_cov_70.392514	20329	21262	+	461	186	https://v10-1.orthodb.org/?query=1266231at2759	Ribosomal biogenesis, methyltransferase, EMG1/NEP1
+1269244at2759	Complete	NODE_224_length_26310_cov_77.091831	11277	11889	+	108	114	https://v10-1.orthodb.org/?query=1269244at2759	RWD domain
+1287401at2759	Complete	NODE_79_length_36749_cov_88.805492	14861	15538	-	422	161	https://v10-1.orthodb.org/?query=1287401at2759	Cytochrome c oxidase assembly protein CtaG/Cox11
+1314980at2759	Complete	NODE_271_length_24607_cov_64.550999	17	3391	+	2004	338	https://v10-1.orthodb.org/?query=1314980at2759	Cleavage and polyadenylation specificity factor subunit 2
+1322642at2759	Complete	NODE_125_length_31935_cov_70.591468	25729	27941	-	569	156	https://v10-1.orthodb.org/?query=1322642at2759	Endonuclease III homolog
+1338131at2759	Complete	NODE_331_length_22588_cov_62.656435	5047	6217	-	511	146	https://v10-1.orthodb.org/?query=1338131at2759	PIN domain
+1339553at2759	Complete	NODE_9184_length_6782_cov_63.954512	3982	4796	+	288	186	https://v10-1.orthodb.org/?query=1339553at2759	GPI transamidase subunit PIG-U
+1342242at2759	Complete	NODE_20_length_76873_cov_5.638132	11269	11869	+	206	154	https://v10-1.orthodb.org/?query=1342242at2759	Aminomethyltransferase, folate-binding domain
+1346432at2759	Complete	NODE_822_length_16102_cov_67.152824	14357	14994	+	257	116	https://v10-1.orthodb.org/?query=1346432at2759	U3 small nucleolar RNA-associated protein 11
+1355894at2759	Complete	NODE_1732_length_11961_cov_76.814372	10948	11418	+	428	128	https://v10-1.orthodb.org/?query=1355894at2759	GNAT domain
+1358374at2759	Complete	NODE_23006_length_4806_cov_51.231761	699	2058	-	745	203	https://v10-1.orthodb.org/?query=1358374at2759	Zinc finger, CCCH-type
+1370285at2759	Complete	NODE_36_length_46386_cov_71.350364	36213	39525	+	623	346	https://v10-1.orthodb.org/?query=1370285at2759	Conserved oligomeric Golgi complex subunit 6
+1370304at2759	Complete	NODE_1622_length_12253_cov_75.026445	5492	7662	-	309	309	https://v10-1.orthodb.org/?query=1370304at2759	-alpha-acetyltransferase 35, NatC auxiliary subunit
+1377237at2759	Complete	NODE_4713_length_8505_cov_63.720218	3908	4557	+	302	136	https://v10-1.orthodb.org/?query=1377237at2759	TIP41-like protein
+1379600at2759	Complete	NODE_666_length_17556_cov_64.000229	5222	8808	-	780	483	https://v10-1.orthodb.org/?query=1379600at2759	Vps53-like, N-terminal
+1395649at2759	Complete	NODE_4394_length_8726_cov_65.916753	3275	3820	+	263	121	https://v10-1.orthodb.org/?query=1395649at2759	Signal peptidase complex subunit 2
+1404162at2759	Complete	NODE_30577_length_4247_cov_51.964269	576	1923	+	376	178	https://v10-1.orthodb.org/?query=1404162at2759	Origin recognition complex, subunit 2
+1405073at2759	Complete	NODE_701_length_17255_cov_86.409186	13242	13810	+	454	157	https://v10-1.orthodb.org/?query=1405073at2759	PUA domain
+1423847at2759	Complete	NODE_473_length_19743_cov_86.165921	5797	6925	-	364	264	https://v10-1.orthodb.org/?query=1423847at2759	RNA 3'-terminal phosphate cyclase domain
+142542at2759	Complete	NODE_24_length_63878_cov_81.008652	43046	46932	-	2011	673	https://v10-1.orthodb.org/?query=142542at2759	Transcription initiation factor TFIID subunit 2
+1428265at2759	Complete	NODE_2139_length_11137_cov_66.216094	2223	7015	-	273	172	https://v10-1.orthodb.org/?query=1428265at2759	Ubiquinol-cytochrome c chaperone, CBP3
+1432328at2759	Complete	NODE_4503_length_8649_cov_68.949603	4060	4936	-	471	178	https://v10-1.orthodb.org/?query=1432328at2759	Autophagy-related protein 3
+1450538at2759	Complete	NODE_200_length_27353_cov_69.057596	20882	21896	+	360	147	https://v10-1.orthodb.org/?query=1450538at2759	Vta1, C-terminal
+1454155at2759	Complete	NODE_832_length_16037_cov_110.726253	6317	6861	+	426	74	https://v10-1.orthodb.org/?query=1454155at2759	Cdk-activating kinase assembly factor MAT1, centre
+1455730at2759	Complete	NODE_142_length_30826_cov_96.864028	7397	9016	-	992	332	https://v10-1.orthodb.org/?query=1455730at2759	SKI-interacting protein, SKIP
+1474000at2759	Fragmented	NODE_711_length_17143_cov_80.647193	9330	9639	-	159	72	https://v10-1.orthodb.org/?query=1474000at2759	Translocation protein Sec62
+1479417at2759	Complete	NODE_364_length_21740_cov_83.537091	4919	6837	+	1101	170	https://v10-1.orthodb.org/?query=1479417at2759	SF3B4, RNA recognition motif 1
+1488436at2759	Complete	NODE_271_length_24607_cov_64.550999	11006	11225	+	271	62	https://v10-1.orthodb.org/?query=1488436at2759	DNA-directed RNA polymerase, 14-18kDa subunit, conserved site
+1513531at2759	Complete	NODE_2115_length_11181_cov_71.955421	7802	8931	+	696	193	https://v10-1.orthodb.org/?query=1513531at2759	Pre-mRNA-splicing factor Isy1
+1526152at2759	Complete	NODE_657_length_17624_cov_64.580783	13763	14207	+	387	84	https://v10-1.orthodb.org/?query=1526152at2759	NADH dehydrogenase 
+1530008at2759	Complete	NODE_773_length_16524_cov_98.778075	12685	13417	+	341	83	https://v10-1.orthodb.org/?query=1530008at2759	H/ACA ribonucleoprotein complex subunit
+1538526at2759	Complete	NODE_988_length_14867_cov_67.503313	1082	1445	+	174	93	https://v10-1.orthodb.org/?query=1538526at2759	Ribosomal protein L7Ae/L30e/S12e/Gadd45
+1545004at2759	Complete	NODE_2638_length_10363_cov_137.921738	9156	9444	-	272	72	https://v10-1.orthodb.org/?query=1545004at2759	LSM domain, eukaryotic/archaea-type
+1558822at2759	Complete	NODE_37389_length_3875_cov_65.422591	1987	2215	-	271	66	https://v10-1.orthodb.org/?query=1558822at2759	LSM domain, eukaryotic/archaea-type
+1567796at2759	Complete	NODE_101_length_33679_cov_74.323403	17245	17743	-	262	132	https://v10-1.orthodb.org/?query=1567796at2759	Prefoldin
+1576404at2759	Complete	NODE_441_length_20395_cov_69.977901	7259	8085	+	491	142	https://v10-1.orthodb.org/?query=1576404at2759	Pre-mRNA-splicing factor  Cwf15/Cwc15
+1588798at2759	Complete	NODE_1792_length_11816_cov_87.211006	2115	7110	-	218	78	https://v10-1.orthodb.org/?query=1588798at2759	Anamorsin
+1617752at2759	Complete	NODE_807_length_16212_cov_66.370995	11037	11367	+	396	94	https://v10-1.orthodb.org/?query=1617752at2759	Transcription elongation factor SPT4
+1620056at2759	Complete	NODE_23_length_67409_cov_78.812318	45029	45597	-	350	81	https://v10-1.orthodb.org/?query=1620056at2759	Ribosomal protein/NADH dehydrogenase domain
+1626636at2759	Fragmented	NODE_24938_length_4645_cov_72.520797	914	1328	-	349	106	https://v10-1.orthodb.org/?query=1626636at2759	Zinc finger, double-stranded RNA binding
+1633672at2759	Complete	NODE_196_length_27441_cov_81.877284	24110	24408	-	321	83	https://v10-1.orthodb.org/?query=1633672at2759	LSM domain, eukaryotic/archaea-type
+179362at2759	Complete	NODE_859_length_15811_cov_67.394560	11233	15222	+	930	724	https://v10-1.orthodb.org/?query=179362at2759	Rad50/SbcC-type AAA domain
+245208at2759	Fragmented	NODE_69618_length_2754_cov_78.590213	301	1998	-	2023	497	https://v10-1.orthodb.org/?query=245208at2759	Splicing factor 3B subunit 1
+257318at2759	Complete	NODE_63_length_38529_cov_71.912254	12698	14301	-	496	292	https://v10-1.orthodb.org/?query=257318at2759	digestive organ expansion factor homolog
+296129at2759	Complete	NODE_719_length_17064_cov_65.325543	12545	15564	+	1200	594	https://v10-1.orthodb.org/?query=296129at2759	RNA cytidine acetyltransferase
+306227at2759	Complete	NODE_3255_length_9641_cov_68.761292	4373	7164	-	912	476	https://v10-1.orthodb.org/?query=306227at2759	Vacuole morphology and inheritance protein 14
+320059at2759	Complete	NODE_8737_length_6907_cov_65.071010	278	1754	+	1904	425	https://v10-1.orthodb.org/?query=320059at2759	Radical SAM
+324863at2759	Complete	NODE_967_length_15065_cov_63.504470	10327	15064	+	1123	492	https://v10-1.orthodb.org/?query=324863at2759	RuvA domain 2-like
+325552at2759	Complete	NODE_605_length_18271_cov_87.024678	2988	7882	+	964	362	https://v10-1.orthodb.org/?query=325552at2759	WD40 repeat
+331411at2759	Complete	NODE_250_length_25387_cov_63.782892	20067	22065	+	1645	401	https://v10-1.orthodb.org/?query=331411at2759	Tetratricopeptide-like helical domain superfamily
+341721at2759	Complete	NODE_605_length_18271_cov_87.024678	11679	13870	+	989	318	https://v10-1.orthodb.org/?query=341721at2759	Nucleolar complex-associated protein 3
+345441at2759	Complete	NODE_40_length_45336_cov_75.958992	32251	33839	+	910	372	https://v10-1.orthodb.org/?query=345441at2759	Phosphoacetylglucosamine mutase
+355408at2759	Complete	NODE_24952_length_4644_cov_58.176483	2688	4126	+	1429	422	https://v10-1.orthodb.org/?query=355408at2759	Tetratricopeptide repeat-containing domain
+375960at2759	Complete	NODE_955_length_15133_cov_83.788722	745	2642	-	641	326	https://v10-1.orthodb.org/?query=375960at2759	DNA polymerase epsilon subunit
+383503at2759	Complete	NODE_2159_length_11093_cov_66.138344	3382	5120	+	711	346	https://v10-1.orthodb.org/?query=383503at2759	Splicing factor 3A subunit 3
+390348at2759	Complete	NODE_14225_length_5800_cov_62.075485	1524	5061	-	2025	551	https://v10-1.orthodb.org/?query=390348at2759	Pyridoxal phosphate-dependent transferase
+396755at2759	Complete	NODE_899_length_15491_cov_96.037888	4480	8236	+	922	648	https://v10-1.orthodb.org/?query=396755at2759	Tetratricopeptide repeat
+426305at2759	Complete	NODE_1233_length_13730_cov_76.219366	9526	11971	+	872	478	https://v10-1.orthodb.org/?query=426305at2759	Sda1
+453044at2759	Complete	NODE_23209_length_4790_cov_63.962232	667	2779	-	949	285	https://v10-1.orthodb.org/?query=453044at2759	Zinc finger, ZPR1-type
+457861at2759	Complete	NODE_2621_length_10386_cov_67.072364	7043	7820	-	264	149	https://v10-1.orthodb.org/?query=457861at2759	Autophagy protein 5
+543764at2759	Complete	NODE_632_length_17885_cov_63.838780	10681	12101	-	337	207	https://v10-1.orthodb.org/?query=543764at2759	tRNA (adenine(58)-N(1))-methyltransferase non-catalytic subunit TRM6
+549762at2759	Complete	NODE_288_length_24172_cov_71.622494	1587	3683	+	842	300	https://v10-1.orthodb.org/?query=549762at2759	Ubiquitin-like modifier-activating enzyme Atg7
+570797at2759	Complete	NODE_1900_length_11586_cov_62.447041	8850	10755	+	685	457	https://v10-1.orthodb.org/?query=570797at2759	Winged helix-like DNA-binding domain superfamily
+582756at2759	Complete	NODE_277_length_24481_cov_114.232216	9040	10913	-	528	335	https://v10-1.orthodb.org/?query=582756at2759	RFT1
+604979at2759	Complete	NODE_1362_length_13205_cov_73.974482	10211	11847	+	998	272	https://v10-1.orthodb.org/?query=604979at2759	WD40-repeat-containing domain
+655400at2759	Complete	NODE_19166_length_5172_cov_60.860648	2146	3890	-	596	282	https://v10-1.orthodb.org/?query=655400at2759	Ubiquinone biosynthesis monooxygenase COQ6
+671536at2759	Fragmented	NODE_1699_length_12043_cov_74.583988	3456	6391	+	606	222	https://v10-1.orthodb.org/?query=671536at2759	Tetratricopeptide repeat
+671846at2759	Complete	NODE_403_length_21055_cov_98.560683	10339	14629	-	729	313	https://v10-1.orthodb.org/?query=671846at2759	Nuclear pore protein 84/107
+673132at2759	Complete	NODE_18415_length_5253_cov_69.795015	3483	4729	-	581	272	https://v10-1.orthodb.org/?query=673132at2759	Aminomethyltransferase
+687505at2759	Complete	NODE_1323_length_13347_cov_78.855011	5361	7293	+	856	214	https://v10-1.orthodb.org/?query=687505at2759	DnaJ domain
+720340at2759	Complete	NODE_4890_length_8401_cov_64.288323	7179	7689	-	417	133	https://v10-1.orthodb.org/?query=720340at2759	Cell division control protein 73, C-terminal
+734341at2759	Complete	NODE_40_length_45336_cov_75.958992	9617	10521	+	456	159	https://v10-1.orthodb.org/?query=734341at2759	ATP12, ATP synthase F1-assembly protein
+734666at2759	Complete	NODE_1011_length_14748_cov_72.181992	2444	4071	-	882	324	https://v10-1.orthodb.org/?query=734666at2759	60S ribosomal export protein NMD3
+736068at2759	Complete	NODE_250_length_25387_cov_63.782892	2852	4187	+	774	315	https://v10-1.orthodb.org/?query=736068at2759	DNA polymerase alpha/delta/epsilon, subunit B
+751335at2759	Complete	NODE_746_length_16832_cov_68.798389	5055	6878	-	582	263	https://v10-1.orthodb.org/?query=751335at2759	ATPase, V1 complex, subunit H
+774318at2759	Complete	NODE_3072_length_9842_cov_64.244547	4509	5631	+	661	271	https://v10-1.orthodb.org/?query=774318at2759	Dol-P-Man
+777920at2759	Complete	NODE_15303_length_5642_cov_71.026415	644	3077	-	1033	335	https://v10-1.orthodb.org/?query=777920at2759	Pescadillo
+779909at2759	Complete	NODE_779_length_16485_cov_70.356229	7352	8315	+	439	225	https://v10-1.orthodb.org/?query=779909at2759	WD40 repeat
+814241at2759	Complete	NODE_7715_length_7199_cov_73.458017	325	1603	-	928	311	https://v10-1.orthodb.org/?query=814241at2759	Clp1, N-terminal beta-sandwich domain
+817008at2759	Complete	NODE_1815_length_11767_cov_70.909153	10225	11580	-	917	296	https://v10-1.orthodb.org/?query=817008at2759	Aminoacyl-tRNA synthetase, class Ic
+834694at2759	Complete	NODE_117_length_32521_cov_69.027925	21425	22964	+	843	324	https://v10-1.orthodb.org/?query=834694at2759	Mre11, DNA-binding
+83779at2759	Complete	NODE_2641_length_10359_cov_66.264443	3188	4547	+	415	229	https://v10-1.orthodb.org/?query=83779at2759	Asparagine synthase
+869548at2759	Complete	NODE_358_length_22000_cov_77.031291	4748	5462	+	394	192	https://v10-1.orthodb.org/?query=869548at2759	Winged helix-like DNA-binding domain superfamily
+878143at2759	Complete	NODE_1642_length_12185_cov_63.017839	10389	11685	+	809	326	https://v10-1.orthodb.org/?query=878143at2759	CAAX prenyl protease 1
+87842at2759	Fragmented	NODE_13810_length_5862_cov_78.704754	114	1791	+	500	320	https://v10-1.orthodb.org/?query=87842at2759	Pep3/Vps18/deep orange
+905026at2759	Complete	NODE_3810_length_9172_cov_65.395492	3719	5361	-	716	350	https://v10-1.orthodb.org/?query=905026at2759	Tetratricopeptide repeat
+918816at2759	Complete	NODE_774_length_16516_cov_65.033335	10082	12208	-	563	188	https://v10-1.orthodb.org/?query=918816at2759	DNA methyltransferase 1-associated 1
+919955at2759	Complete	NODE_445_length_20372_cov_68.899778	12260	13349	+	683	262	https://v10-1.orthodb.org/?query=919955at2759	26S Proteasome non-ATPase regulatory subunit 13
+923657at2759	Complete	NODE_2445_length_10644_cov_70.869689	1883	3109	-	419	163	https://v10-1.orthodb.org/?query=923657at2759	Surfeit locus 1/Shy1
+931188at2759	Complete	NODE_432_length_20500_cov_66.510160	17526	19204	-	638	346	https://v10-1.orthodb.org/?query=931188at2759	Zinc finger, RING/FYVE/PHD-type
+937686at2759	Complete	NODE_340_length_22460_cov_99.672787	3799	5208	+	869	337	https://v10-1.orthodb.org/?query=937686at2759	Winged helix-like DNA-binding domain superfamily
+939345at2759	Complete	NODE_22_length_68392_cov_74.446373	11895	14726	-	391	99	https://v10-1.orthodb.org/?query=939345at2759	Repressor of RNA polymerase III transcription MAF1
+944899at2759	Complete	NODE_19055_length_5183_cov_61.240306	1975	2862	-	668	221	https://v10-1.orthodb.org/?query=944899at2759	KRR1 small subunit processome component
+946128at2759	Complete	NODE_182_length_28116_cov_81.779842	2344	4289	-	773	457	https://v10-1.orthodb.org/?query=946128at2759	TFIIH p62 subunit, N-terminal
+956854at2759	Complete	NODE_277_length_24481_cov_114.232216	527	2086	-	570	172	https://v10-1.orthodb.org/?query=956854at2759	Tetratricopeptide repeat
+974865at2759	Complete	NODE_635_length_17844_cov_74.702707	11250	12268	+	404	219	https://v10-1.orthodb.org/?query=974865at2759	Brix domain
+975158at2759	Complete	NODE_3629_length_9309_cov_57.572140	1550	3381	+	743	272	https://v10-1.orthodb.org/?query=975158at2759	Dolichyl-diphosphooligosaccharide--protein glycosyltransferase 48kDa subunit
+975557at2759	Complete	NODE_480_length_19652_cov_62.517752	10697	13058	-	1222	456	https://v10-1.orthodb.org/?query=975557at2759	cell division cycle 5-like protein
+981902at2759	Complete	NODE_673_length_17488_cov_67.777152	11036	11961	+	472	186	https://v10-1.orthodb.org/?query=981902at2759	Winged helix-like DNA-binding domain superfamily
+937275at2759	Missing
+598949at2759	Missing
+1003258at2759	Missing
+891751at2759	Missing
+887370at2759	Missing
+621827at2759	Missing
+1041560at2759	Missing
+1065019at2759	Missing
+1257440at2759	Missing
+166920at2759	Missing
+1382842at2759	Missing
+679187at2759	Missing
+924753at2759	Missing
+1312453at2759	Missing
+768809at2759	Missing
+1525971at2759	Missing
+1407446at2759	Missing
+1398309at2759	Missing
+1269649at2759	Missing
+1645187at2759	Missing
+917326at2759	Missing
+1346165at2759	Missing
+1421503at2759	Missing
+1322299at2759	Missing
+1197019at2759	Missing
+901894at2759	Missing
+330169at2759	Missing
+491869at2759	Missing
+1364586at2759	Missing
+1032689at2759	Missing
+1284731at2759	Missing
+1440961at2759	Missing
+1442062at2759	Missing
+290630at2759	Missing
+1079130at2759	Missing
+369837at2759	Missing
+996662at2759	Missing
+1309031at2759	Missing
+844748at2759	Missing
+1173229at2759	Missing
+271586at2759	Missing
+261419at2759	Missing
+1488235at2759	Missing
+176625at2759	Missing
+674160at2759	Missing
+1111142at2759	Missing
+1380409at2759	Missing
+388820at2759	Missing
+97116at2759	Missing
+1223488at2759	Missing
+1076134at2759	Missing
+270107at2759	Missing
+1053181at2759	Missing
+1441854at2759	Missing
+674169at2759	Missing
+1291729at2759	Missing
+1200489at2759	Missing
+708105at2759	Missing
+1504863at2759	Missing
+858842at2759	Missing
+1287094at2759	Missing
+1090038at2759	Missing
+1348942at2759	Missing
+1014314at2759	Missing
+1575179at2759	Missing
+160593at2759	Missing
+392369at2759	Missing
+1233814at2759	Missing
+156083at2759	Missing
+1247641at2759	Missing
+898782at2759	Missing
+1128607at2759	Missing
+722805at2759	Missing
+976469at2759	Missing
+1405146at2759	Missing
+973442at2759	Missing
+1264469at2759	Missing
+450058at2759	Missing
+1459797at2759	Missing
+1096688at2759	Missing
+759498at2759	Missing
+801857at2759	Missing
+293315at2759	Missing
+1217666at2759	Missing
+551907at2759	Missing
+1106766at2759	Missing
+261328at2759	Missing
+836599at2759	Missing
+1445102at2759	Missing
+299766at2759	Missing
+865202at2759	Missing
+866359at2759	Missing
+855834at2759	Missing
+664730at2759	Missing
+1430056at2759	Missing
+1593937at2759	Missing
+679771at2759	Missing
+1038775at2759	Missing
+1323575at2759	Missing
+719531at2759	Missing
+464990at2759	Missing
+761109at2759	Missing
+1129824at2759	Missing
+1249159at2759	Missing
+1563319at2759	Missing
+1426075at2759	Missing
+1157302at2759	Missing
+418107at2759	Missing
+1324510at2759	Missing
+513979at2759	Missing
+1085752at2759	Missing
+1428854at2759	Missing
+1490022at2759	Missing
+1025450at2759	Missing
+1275837at2759	Missing
+692986at2759	Missing
+911863at2759	Missing
+625387at2759	Missing
+1251252at2759	Missing
+39650at2759	Missing
+721605at2759	Missing
+1552706at2759	Missing
+1236198at2759	Missing
+1260807at2759	Missing
+1112002at2759	Missing
+1304061at2759	Missing
+1623701at2759	Missing
+1434266at2759	Missing

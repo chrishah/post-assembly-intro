@@ -1,0 +1,19 @@
+#                                                                                                                                      --- full sequence --- -------------- this domain -------------   hmm coord   ali coord   env coord
+# target name                                                                  accession   tlen query name           accession   qlen   E-value  score  bias   #  of  c-Evalue  i-Evalue  score  bias  from    to  from    to  from    to  acc description of target
+#                                                          ------------------- ---------- ----- -------------------- ---------- ----- --------- ------ ----- --- --- --------- --------- ------ ----- ----- ----- ----- ----- ----- ----- ---- ---------------------
+1355894at2759_65357_1:000af2|NODE_1732_length_11961_cov_76.814372:10948-11418  -            157 1355894at2759        -            142   3.1e-27   84.2   1.2   1   1   1.4e-25   1.6e-25   78.7   1.2     8   136     2   155     1   157 0.83 -
+1355894at2759_101020_0:004d3a|NODE_1732_length_11961_cov_76.814372:10948-11406 -            153 1355894at2759        -            142   7.6e-27   83.0   1.4   1   1   4.7e-25   5.4e-25   77.0   1.4     8   132     2   151     1   153 0.81 -
+1355894at2759_3750_0:0096b9|NODE_1732_length_11961_cov_76.814372:10948-11406   -            153 1355894at2759        -            142   7.6e-27   83.0   1.4   1   1   4.7e-25   5.4e-25   77.0   1.4     8   132     2   151     1   153 0.81 -
+1355894at2759_3760_0:00188d|NODE_1732_length_11961_cov_76.814372:10948-11406   -            153 1355894at2759        -            142   7.6e-27   83.0   1.4   1   1   4.7e-25   5.4e-25   77.0   1.4     8   132     2   151     1   153 0.81 -
+1355894at2759_225117_0:00164d|NODE_1732_length_11961_cov_76.814372:10948-11406 -            153 1355894at2759        -            142   1.1e-26   82.5   1.2   1   1   4.8e-25   5.7e-25   76.9   1.2     8   132     2   151     1   153 0.82 -
+1355894at2759_9749_0:00481e|NODE_1732_length_11961_cov_76.814372:10893-11298   -            114 1355894at2759        -            142   1.5e-25   78.8   0.0   1   1   1.5e-25   1.7e-25   78.5   0.0     5   101     7   114     3   114 0.86 -
+#
+# Program:         hmmsearch
+# Version:         3.1b2 (February 2015)
+# Pipeline mode:   SEARCH
+# Query file:      mb_downloads/eukaryota_odb10/hmms/1355894at2759.hmm
+# Target file:     -
+# Option settings: /opt/conda/envs/compleasm/bin/hmmsearch --domtblout compleasm/eukaryota_odb10/hmmer_output/1355894at2759.out --cpu 1 mb_downloads/eukaryota_odb10/hmms/1355894at2759.hmm - 
+# Current dir:     /in
+# Date:            Tue Oct 22 12:38:51 2024
+# [ok]
