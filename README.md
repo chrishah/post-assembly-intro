@@ -294,7 +294,7 @@ Finally, one of the nicest features of blobtools is that the visualizations can 
 <details>
    <summary>
 
-   ## Create a hitsfile using blast
+   ### Create a hitsfile using blast (click text to see)
 
    </summary>
 
