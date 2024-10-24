@@ -289,6 +289,13 @@ Checkout `blobtools_bam.blobDB.json.bestsum.phylum.p8.span.100.blobplot.bam0.png
 
 Finally, one of the nicest features of blobtools is that the visualizations can be taxonomically annotated - see [here](https://blobtools.readme.io/docs/taxonomic-annotation). What you'll need is a so-called 'hits files'. This is essentially a text files obtained via comparing the assembly against a reference database using `blast` or other tools - see [here](https://blobtools.readme.io/docs/taxonomy-file).
 
+<details>
+   <summary>
+
+   __Create a hitsfile using blast__
+
+   </summary>
+
 So, you could download the entirety of NCBI's nt (nucleotide) database. BLAST you assembly against it and use the info you get to annotate you blobs.
 
 ***Attention***
@@ -317,6 +324,8 @@ Then, you would use BLAST to compare your genome against the database - the blob
                -num_threads 10 \
                -out blastn.fmt6.out.txt
 ```
+
+</details>
 
 ***continue here, as part of the course***
 
