@@ -294,7 +294,8 @@ Don't do as part of a course unless you're asked to (will download about 250 GB 
 
 <details>
    <summary>
-   __Create a hitsfile using blast__
+
+   ### Create a hitsfile using blast
 
    </summary>
 
