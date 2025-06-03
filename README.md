@@ -473,8 +473,9 @@ Checkout `blobtools_bam.blobDB.json.bestsum.phylum.p8.span.100.blobplot.bam0.png
 
 Finally, one of the nicest features of blobtools is that the visualizations can be taxonomically annotated - see [here](https://blobtools.readme.io/docs/taxonomic-annotation). What you'll need is a so-called 'hits files'. This is essentially a text files obtained via comparing the assembly against a reference database using `blast` or other tools - see [here](https://blobtools.readme.io/docs/taxonomy-file).
 
-***Drop down below to see how a hits file could be obtained using blast***
-***Don't do as part of a course unless you're asked to (will download about 250 GB worth of data)***
+>[!CAUTION]
+>The drop down below demonstrates how a hits file could be obtained using blast. Don't do this as part of a course unless you're asked to (this will download about 250 GB worth of data)
+
 <details>
    <summary>
 
