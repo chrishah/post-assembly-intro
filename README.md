@@ -1,6 +1,8 @@
 # post-assembly-intro
 Tutorial for common steps post denovo genome assembly
 
+Github URL: [https://github.com/chrishah/post-assembly-intro](https://github.com/chrishah/post-assembly-intro)
+
 
 ***Disclaimer***
 To follow the demo and make the most of it, it helps if you have some basic skills with running software tools and manipulating files using the Unix shell command line. It assumes you have Singularity or Docker installed on your computer (tested with Docker version 18.09.7, build 2d0083d; on Ubuntu 18.04).
