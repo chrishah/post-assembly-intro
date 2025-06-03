@@ -3,7 +3,7 @@ Tutorial for common steps post denovo genome assembly
 
 
 ***Disclaimer***
-To follow the demo and make the most of it, it helps if you have some basic skills with running software tools and manipulating files using the Unix shell command line. It assumes you have Docker installed on your computer (tested with Docker version 18.09.7, build 2d0083d; on Ubuntu 18.04).
+To follow the demo and make the most of it, it helps if you have some basic skills with running software tools and manipulating files using the Unix shell command line. It assumes you have Singularity or Docker installed on your computer (tested with Docker version 18.09.7, build 2d0083d; on Ubuntu 18.04).
 
 ## Introduction
 Once you have assembled a genome you usually want to assess the quality based on certain metrics, such as contiguity, completeness, perhaps even evaluate if your assembly is contaminated with sequences from 'non-target' organisms.
@@ -37,9 +37,24 @@ At this stage you have probably heard about the most common assembly stats for d
 We have a toy genome assembly in your `data/` directory - let's run quast on it.
 
 ```bash
+(user@host)-$ singularity exec docker://reslp/quast:5.0.2 \
+               quast.py data/genome_assembly.fasta
+```
+
+<details>
+   <summary>
+
+   ### using Docker (click text, if hidden)
+
+   </summary>
+
+```bash
 (user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in reslp/quast:5.0.2 \
                quast.py data/genome_assembly.fasta
 ```
+
+</details>
+
 
 This produces a directory `quast_results` containing the stats. You can have a quick look at those in a simple text file.
 ```bash
@@ -64,13 +79,31 @@ Anyway, BUSCO is the 'new kid' (well, not so new any more) and works also very w
 __2a.) BUSCO__
 
 Now, let's run BUSCO (will take about 15 minutes):
+
+```bash
+(user@host)-$ singularity exec docker://ezlabgva/busco:v5.2.1_cv1 \
+              busco -i data/genome_assembly.fasta \
+              -o busco -m genome -l eukaryota \
+              -c 2 -f 
+```
+
+<details>
+   <summary>
+
+   ### using Docker (click text, if hidden)
+
+   </summary>
+
 ```bash
 (user@host)-$ docker run --rm -v $(pwd):/in -w /in ezlabgva/busco:v5.2.1_cv1 \
               busco -i data/genome_assembly.fasta \
               -o busco -m genome -l eukaryota \
-              -c 2 -f \
-              --augustus --augustus_species schistosoma
+              -c 2 -f 
 ```
+
+</details>
+
+
 While it is running, feel free to open a new terminal window and already start exploring the outputs that we have precomputed for you in `data/outputs/busco/`.
 
 If you ran BUSCO as above it will have created one directory called `busco` (because you said `-o busco` above). Note that if you run it a second time, it will complain and
@@ -82,7 +115,6 @@ A few words on the parameters used:
  - `-l` - BUSCO provides sets of reference genes at particular taxonomic levels - see [here](https://busco-data.ezlab.org/v5/data/lineages/) for a full list.
  - `-c` - use this number of CPUs
  - `-f` - force overwrite results from previous run - if you had used the same name before
- - `--augustus --augustus_species` - this part specifies that we want to use a particular version of the algorithm that internally uses a software called `augustus` in the process of gene identification - this can be omitted completely in version 5 of BUSCO, then another approach `metaeuk` will be used.
 
 A detailed explanation of the parameters can be found on the BUSCO [webpage](https://busco.ezlab.org/) and we're also using BUSCO as part of different training sessions (for example [this](https://github.com/chrishah/phylogenomics-intro) or [this](https://github.com/chrishah/phylogenomics_intro_vertebrata)).
 
@@ -106,7 +138,14 @@ __2b.) compleasm__
 
 A very recent addition to these kind of evaluation tools is `compleasm` and it claims to be '_a faster and more accurate reimplementation of BUSCO_'. Let's see. In this case the developers already provide us with a Docker image. As discussed (hopefully) this could be used via `Docker` or `Singularity`/`Apptainer`.
 
-So, we can __either__ run it via `Docker`:
+So, we can __either__ run it via `Singularity`:
+
+```bash
+(user@host)-$ singularity exec docker://huangnengcsu/compleasm:v0.2.6 \
+                compleasm run \
+                -a data/genome_assembly.fasta -l eukaryota -o compleasm -t 2
+```
+.. __or__ via `Docker`:
 
 ```bash
 (user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in huangnengcsu/compleasm:v0.2.6 \
@@ -114,13 +153,6 @@ So, we can __either__ run it via `Docker`:
                 -a /in/data/genome_assembly.fasta -l eukaryota -o compleasm -t 2
 ```
 
-.. __or__ via `Singularity`:
-
-```bash
-(user@host)-$ singularity exec docker://huangnengcsu/compleasm:v0.2.6 \
-                compleasm run \
-                -a data/genome_assembly.fasta -l eukaryota -o compleasm -t 2
-```
 
 While this is running (you'd need to open a new terminal window to do this), or in case you don't want to run at this stage, we can look at the outputs that `compleasm` produces. Example results ship with the repository:
 
@@ -131,15 +163,30 @@ While this is running (you'd need to open a new terminal window to do this), or 
 
 __2c.) CEGMA__
 
-CEGMA, once installed, or containerized, is simple to run (it has a lot of options that you can explore in your own time) - takes a while though:
+CEGMA, once installed, or containerized, is simple to run (it has a lot of options that you can explore in your own time) - takes a while though.
 
-***ATTENTION***
-> The next step (`cegma`) will run for about an hour, so if you are in a rush, you can also skip this and look at the output that we have deposited with the repo (see below).
+>[!CAUTION]
+>The next step (`cegma`) will run for about an hour, so if you are in a rush, you can also skip this and look at the output that we have deposited with the repo (see below).
+
+```bash
+(user@host)-$ singularity exec docker://chrishah/cegma:2.5 \
+               cegma --threads 2 -g data/genome_assembly.fasta
+```
+
+<details>
+   <summary>
+
+   ### using Docker (click text, if hidden)
+
+   </summary>
 
 ```bash
 (user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in chrishah/cegma:2.5 \
                cegma --threads 2 -g data/genome_assembly.fasta
 ```
+
+</details>
+
 While it is running we can skip to the next part and talk about mapping reads to genomes.
 
 Once it's done the thing you want to be looking at is the CEGMA report in `output.completeness_report`. A gff file with the genes cegma has predicted can be found at `output.cegma.gff`.
@@ -160,9 +207,24 @@ Read mapping is covered by many online tutorials, so I'll just show you how it c
 
 First index your genome file.
 ```bash
+(user@host)-$ singularity exec docker://reslp/bowtie2:2.3.5 \
+               bowtie2-build data/genome_assembly.fasta my_genome.index -q
+```
+
+<details>
+   <summary>
+
+   ### using Docker (click text, if hidden)
+
+   </summary>
+
+```bash
 (user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in reslp/bowtie2:2.3.5 \
                bowtie2-build data/genome_assembly.fasta my_genome.index -q
 ```
+
+</details>
+
 Check out which new files have been created.
 ```bash
 (user@host)-$ ls -hlrt
@@ -170,10 +232,26 @@ Check out which new files have been created.
 
 Then, map the reads to the indexed genome (this will take a minute or so with nothing happening apparently on your screen - be patient).
 ```bash
+(user@host)-$ singularity exec docker://reslp/bowtie2:2.3.5 \
+               bowtie2 -1 data/reads.1.fastq.gz -2 data/reads.2.fastq.gz \
+               --threads 2 -q --phred33 --fr -x my_genome.index -S my_mapped_reads.sam
+```
+
+<details>
+   <summary>
+
+   ### using Docker (click text, if hidden)
+
+   </summary>
+
+```bash
 (user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in reslp/bowtie2:2.3.5 \
                bowtie2 -1 data/reads.1.fastq.gz -2 data/reads.2.fastq.gz \
                --threads 2 -q --phred33 --fr -x my_genome.index -S my_mapped_reads.sam
 ```
+
+</details>
+
 This has produced a file called `my_mapped_reads.sam`. This is simple text file formatted in [sam](https://samtools.github.io/hts-specs/SAMv1.pdf) format, that contains information on where in the genome certain reads mapped (if at all).
 
 You can look into the file, if you dare.. - just the first 1000 lines.
@@ -184,9 +262,24 @@ Since SAM is just a text file and for large amounts of data these files may get 
 
 The next step will be to convert the SAM to a BAM file.
 ```bash
+(user@host)-$ singularity exec docker://reslp/samtools:1.9 \
+               samtools view -bS my_mapped_reads.sam -o my_mapped_reads.bam -@ 2
+```
+
+<details>
+   <summary>
+
+   ### using Docker (click text, if hidden)
+
+   </summary>
+
+```bash
 (user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in reslp/samtools:1.9 \
                samtools view -bS my_mapped_reads.sam -o my_mapped_reads.bam -@ 2
 ```
+
+</details>
+
 
 Check out the size of the newest file `my_mapped_reads.bam` as compared to the original SAM file. Note that we have not lost any information - we have just compressed the data.
 ```bash
@@ -194,6 +287,22 @@ Check out the size of the newest file `my_mapped_reads.bam` as compared to the o
 ```
 
 Two more steps that are usually being done are sorting and indexing the bam file - this is the convention, and what most downstream tools expect.
+```bash
+(user@host)-$ singularity exec docker://reslp/samtools:1.9 \
+               samtools sort -o my_mapped_reads.sorted.bam my_mapped_reads.bam -@ 2
+
+(user@host)-$ singularity exec docker://reslp/samtools:1.9 \
+               samtools index my_mapped_reads.sorted.bam -@ 2
+
+```
+
+<details>
+   <summary>
+
+   ### using Docker (click text, if hidden)
+
+   </summary>
+
 ```bash
 (user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in reslp/samtools:1.9 \
                samtools sort -o my_mapped_reads.sorted.bam my_mapped_reads.bam -@ 2
@@ -203,7 +312,24 @@ Two more steps that are usually being done are sorting and indexing the bam file
 
 ```
 
+</details>
+
 A common step that I want to at least mention is the removal of duplicates. [Picard](https://broadinstitute.github.io/picard/) offers a good option there.
+
+```bash
+(user@host)-$ singularity exec docker://broadinstitute/picard:2.20.6 \
+               java -jar /usr/picard/picard.jar MarkDuplicates \
+               INPUT=my_mapped_reads.sorted.bam OUTPUT=my_mapped_reads.sorted.duprmvd.bam \
+               METRICS_FILE=my_mapped_reads.sorted.duprmvd.metrics REMOVE_DUPLICATES=true \
+               ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=1000
+```
+
+<details>
+   <summary>
+
+   ### using Docker (click text, if hidden)
+
+   </summary>
 
 ```bash
 (user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in broadinstitute/picard:2.20.6 \
@@ -213,14 +339,30 @@ A common step that I want to at least mention is the removal of duplicates. [Pic
                ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=1000
 ```
 
+</details>
+
 I encourage you to inspect the assembly and reads mapping to it visually. A possible tool is the Integrative Genomics Viewer [igv](https://software.broadinstitute.org/software/igv/). You can install it at some point, but for now we're going to use through a webapp - go [here](https://igv.org/app/). Another stand alone program you can explore later is [Tablet](https://ics.hutton.ac.uk/tablet/).
 
 First we need to index our reference genome.
 Index the genome for viewing.
 ```bash
+(user@host)-$ singularity exec docker://reslp/samtools:1.9 \
+               samtools faidx data/genome_assembly.fasta
+```
+
+<details>
+   <summary>
+
+   ### using Docker (click text, if hidden)
+
+   </summary>
+
+```bash
 (user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in reslp/samtools:1.9 \
                samtools faidx data/genome_assembly.fasta
 ```
+
+</details>
 
 If you followed until here you're going to need the following files downloaded locally:
  - `data/genome_assembly.fasta` (genome fasta; came with the repo)
@@ -260,6 +402,25 @@ Blobtools can extract coverage information from bam files (gladly we made one ab
 
 Blobtools needs to be run in three steps - do consult the manual on the Blobtools [webpage](https://blobtools.readme.io/docs) to get more info on what the individual steps are doing.
 ```bash
+(user@host)-$ singularity exec docker://chrishah/blobtools:v1.1.1 \
+               blobtools create -i data/genome_assembly.fasta -y spades -o blobtools_spades
+
+(user@host)-$ singularity exec docker://chrishah/blobtools:v1.1.1 \
+               blobtools view -i blobtools_spades.blobDB.json
+
+(user@host)-$ singularity exec docker://chrishah/blobtools:v1.1.1 \
+               blobtools plot -i blobtools_spades.blobDB.json
+```
+
+
+<details>
+   <summary>
+
+   ### using Docker (click text, if hidden)
+
+   </summary>
+
+```bash
 (user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in chrishah/blobtools:v1.1.1 \
                blobtools create -i data/genome_assembly.fasta -y spades -o blobtools_spades
 
@@ -270,9 +431,29 @@ Blobtools needs to be run in three steps - do consult the manual on the Blobtool
                blobtools plot -i blobtools_spades.blobDB.json
 ```
 
+</details>
+
 The file you want to look at first of all is: `blobtools_spades.blobDB.json.bestsum.phylum.p8.span.100.blobplot.spades.png`, but there is lots more to explore on your own.
 
 Now, let's assume you hadn't used SPAdes as your assembler, you can still use blobtools, but in this case you need to give the coverage information in a different way, e.g. a bam file.
+```bash
+(user@host)-$ singularity exec docker://chrishah/blobtools:v1.1.1 \
+               blobtools create -i data/genome_assembly.fasta -b my_mapped_reads.sorted.bam -o blobtools_bam
+
+(user@host)-$ singularity exec docker://chrishah/blobtools:v1.1.1 \
+               blobtools view -i blobtools_bam.blobDB.json
+
+(user@host)-$ singularity exec docker://chrishah/blobtools:v1.1.1 \
+               blobtools plot -i blobtools_bam.blobDB.json
+
+```
+
+<details>
+   <summary>
+
+   ### using Docker (click text, if hidden)
+
+   </summary>
 
 ```bash
 (user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in chrishah/blobtools:v1.1.1 \
@@ -285,6 +466,9 @@ Now, let's assume you hadn't used SPAdes as your assembler, you can still use bl
                blobtools plot -i blobtools_bam.blobDB.json
 
 ```
+
+</details>
+
 Checkout `blobtools_bam.blobDB.json.bestsum.phylum.p8.span.100.blobplot.bam0.png` - there shouldn't be much difference to the previous result. The second result is derived based on actual mapping results, so actually mapped reads and since I have not given you the full readset there is some differences with respect to the y-axis (coverage). The main purpose of this exercise is to demonstrate how to use blobtools if the genome you are working with had not been made with one of the supported assemblers.
 
 Finally, one of the nicest features of blobtools is that the visualizations can be taxonomically annotated - see [here](https://blobtools.readme.io/docs/taxonomic-annotation). What you'll need is a so-called 'hits files'. This is essentially a text files obtained via comparing the assembly against a reference database using `blast` or other tools - see [here](https://blobtools.readme.io/docs/taxonomy-file).
@@ -346,6 +530,26 @@ Now, try to give this additional info to blobtools. Last thing you need is a so 
 From this you get a file `nodes.dmp` and a `names.dmp` file - these you need in the next step.
 
 ```bash
+(user@host)-$ singularity exec docker://chrishah/blobtools:v1.1.1 \
+               blobtools create -i data/genome_assembly.fasta -y spades \
+               --nodes nodes.dmp --names names.dmp --hitsfile data/blastn.fmt6.out.txt -o blobtools_tax
+
+(user@host)-$ singularity exec docker://chrishah/blobtools:v1.1.1 \
+               blobtools view -i blobtools_tax.blobDB.json
+
+(user@host)-$ singularity exec docker://chrishah/blobtools:v1.1.1 \
+               blobtools plot -i blobtools_tax.blobDB.json
+
+```
+
+<details>
+   <summary>
+
+   ### using Docker (click text, if hidden)
+
+   </summary>
+
+```bash
 (user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in chrishah/blobtools:v1.1.1 \
                blobtools create -i data/genome_assembly.fasta -y spades \
                --nodes nodes.dmp --names names.dmp --hitsfile data/blastn.fmt6.out.txt -o blobtools_tax
@@ -357,6 +561,8 @@ From this you get a file `nodes.dmp` and a `names.dmp` file - these you need in 
                blobtools plot -i blobtools_tax.blobDB.json
 
 ```
+
+</details>
 
 What you want to look at initially is:
  - `blobtools_tax.blobDB.json.bestsum.phylum.p8.span.100.blobplot.bam0.png`
@@ -377,10 +583,26 @@ We could get all contig/scaffold ids that were classified as Chordata and write 
 
 Then, use another tool from the blobtools suite (see [here](https://blobtools.readme.io/docs/bamfilter)) to extract the relevant reads from the original bam file. Note that if you did not run all commands above you can still try the below by adjusting the paths to the input files to point to the precomputed results in `data/outputs/read_mapping/my_mapped_reads.sorted.bam`
 ```bash
+(user@host)-$ singularity exec docker://chrishah/blobtools:v1.1.1 \
+               blobtools bamfilter -b my_mapped_reads.sorted.bam -i Chordata.list.txt \
+               --read_format fq --noninterleaved -o reads_Chordata
+```
+
+
+<details>
+   <summary>
+
+   ### using Docker (click text, if hidden)
+
+   </summary>
+
+```bash
 (user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in chrishah/blobtools:v1.1.1 \
                blobtools bamfilter -b my_mapped_reads.sorted.bam -i Chordata.list.txt \
                --read_format fq --noninterleaved -o reads_Chordata
 ```
+
+</details>
 
 Thanks for joining us today!
 
@@ -388,7 +610,7 @@ If you have any questions, comments, feedback (good OR bad), let me know!
 
 __What do you think?__
 
-# Contact
+## Contact
 Christoph Hahn - <christoph.hahn@uni-graz.at>
 
 
