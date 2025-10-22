@@ -39,9 +39,24 @@ At this stage you have probably heard about the most common assembly stats for d
 We have a toy genome assembly in your `data/` directory - let's run quast on it.
 
 ```bash
+(user@host)-$ singularity exec ~/Share/Singularity_images/quast_5.0.2.sif \
+               quast.py data/genome_assembly.fasta
+```
+
+<details>
+   <summary>
+
+   ### using Singularity via Dockerhub (click text, if hidden)
+
+   </summary>
+
+```bash
 (user@host)-$ singularity exec docker://reslp/quast:5.0.2 \
                quast.py data/genome_assembly.fasta
 ```
+
+</details>
+
 
 <details>
    <summary>
@@ -83,11 +98,27 @@ __2a.) BUSCO__
 Now, let's run BUSCO (will take about 15 minutes):
 
 ```bash
-(user@host)-$ singularity exec docker://ezlabgva/busco:v5.2.1_cv1 \
+(user@host)-$ singularity exec ~/Share/Singularity_images/busco_v5.3.2_cv1.sif \
               busco -i data/genome_assembly.fasta \
               -o busco -m genome -l eukaryota \
               -c 2 -f 
 ```
+
+<details>
+   <summary>
+
+   ### using Singularity via Dockerhub (click text, if hidden)
+
+   </summary>
+
+```bash
+(user@host)-$ singularity exec docker://ezlabgva/busco:v5.3.2_cv1 \
+              busco -i data/genome_assembly.fasta \
+              -o busco -m genome -l eukaryota \
+              -c 2 -f 
+```
+
+</details>
 
 <details>
    <summary>
@@ -97,7 +128,8 @@ Now, let's run BUSCO (will take about 15 minutes):
    </summary>
 
 ```bash
-(user@host)-$ docker run --rm -v $(pwd):/in -w /in ezlabgva/busco:v5.2.1_cv1 \
+(user@host)-$ docker run --rm -v $(pwd):/in -w /in \
+              ezlabgva/busco:v5.3.2_cv1 \
               busco -i data/genome_assembly.fasta \
               -o busco -m genome -l eukaryota \
               -c 2 -f 
@@ -171,9 +203,24 @@ CEGMA, once installed, or containerized, is simple to run (it has a lot of optio
 >The next step (`cegma`) will run for about an hour, so if you are in a rush, you can also skip this and look at the output that we have deposited with the repo (see below).
 
 ```bash
+(user@host)-$ singularity exec ~/Share/Singularity_images/cegma_2.5.sif \
+               cegma --threads 2 -g data/genome_assembly.fasta
+```
+
+<details>
+   <summary>
+
+   ### using Singularity via Dockerhub (click text, if hidden)
+
+   </summary>
+
+```bash
 (user@host)-$ singularity exec docker://chrishah/cegma:2.5 \
                cegma --threads 2 -g data/genome_assembly.fasta
 ```
+
+</details>
+
 
 <details>
    <summary>
@@ -209,9 +256,24 @@ Read mapping is covered by many online tutorials, so I'll just show you how it c
 
 First index your genome file.
 ```bash
+(user@host)-$ singularity exec ~/Share/Singularity_images/bowtie2_2.3.5.sif \
+               bowtie2-build data/genome_assembly.fasta my_genome.index -q
+```
+
+<details>
+   <summary>
+
+   ### using Singularity via Dockerhub (click text, if hidden)
+
+   </summary>
+
+```bash
 (user@host)-$ singularity exec docker://reslp/bowtie2:2.3.5 \
                bowtie2-build data/genome_assembly.fasta my_genome.index -q
 ```
+
+</details>
+
 
 <details>
    <summary>
@@ -234,7 +296,7 @@ Check out which new files have been created.
 
 Then, map the reads to the indexed genome (this will take a minute or so with nothing happening apparently on your screen - be patient).
 ```bash
-(user@host)-$ singularity exec docker://reslp/bowtie2:2.3.5 \
+(user@host)-$ singularity exec ~/Share/Singularity_images/bowtie2_2.3.5.sif \
                bowtie2 -1 data/reads.1.fastq.gz -2 data/reads.2.fastq.gz \
                --threads 2 -q --phred33 --fr -x my_genome.index -S my_mapped_reads.sam
 ```
@@ -264,9 +326,24 @@ Since SAM is just a text file and for large amounts of data these files may get 
 
 The next step will be to convert the SAM to a BAM file.
 ```bash
+(user@host)-$ singularity exec ~/Share/Singularity_images/samtools_1.9.sif \
+               samtools view -bS my_mapped_reads.sam -o my_mapped_reads.bam -@ 2
+```
+
+<details>
+   <summary>
+
+   ### using Singularity via Dockerhub (click text, if hidden)
+
+   </summary>
+
+```bash
 (user@host)-$ singularity exec docker://reslp/samtools:1.9 \
                samtools view -bS my_mapped_reads.sam -o my_mapped_reads.bam -@ 2
 ```
+
+</details>
+
 
 <details>
    <summary>
@@ -290,10 +367,10 @@ Check out the size of the newest file `my_mapped_reads.bam` as compared to the o
 
 Two more steps that are usually being done are sorting and indexing the bam file - this is the convention, and what most downstream tools expect.
 ```bash
-(user@host)-$ singularity exec docker://reslp/samtools:1.9 \
+(user@host)-$ singularity exec ~/Share/Singularity_images/samtools_1.9.sif \
                samtools sort -o my_mapped_reads.sorted.bam my_mapped_reads.bam -@ 2
 
-(user@host)-$ singularity exec docker://reslp/samtools:1.9 \
+(user@host)-$ singularity exec ~/Share/Singularity_images/samtools_1.9.sif \
                samtools index my_mapped_reads.sorted.bam -@ 2
 
 ```
@@ -319,12 +396,30 @@ Two more steps that are usually being done are sorting and indexing the bam file
 A common step that I want to at least mention is the removal of duplicates. [Picard](https://broadinstitute.github.io/picard/) offers a good option there.
 
 ```bash
+(user@host)-$ singularity exec ~/Share/Singularity_images/picard_2.20.6.sif \
+               java -jar /usr/picard/picard.jar MarkDuplicates \
+               INPUT=my_mapped_reads.sorted.bam OUTPUT=my_mapped_reads.sorted.duprmvd.bam \
+               METRICS_FILE=my_mapped_reads.sorted.duprmvd.metrics REMOVE_DUPLICATES=true \
+               ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=1000
+```
+
+<details>
+   <summary>
+
+   ### using Singularity via Dockerhub (click text, if hidden)
+
+   </summary>
+
+```bash
 (user@host)-$ singularity exec docker://broadinstitute/picard:2.20.6 \
                java -jar /usr/picard/picard.jar MarkDuplicates \
                INPUT=my_mapped_reads.sorted.bam OUTPUT=my_mapped_reads.sorted.duprmvd.bam \
                METRICS_FILE=my_mapped_reads.sorted.duprmvd.metrics REMOVE_DUPLICATES=true \
                ASSUME_SORTED=true VALIDATION_STRINGENCY=LENIENT MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=1000
 ```
+
+</details>
+
 
 <details>
    <summary>
@@ -348,7 +443,7 @@ I encourage you to inspect the assembly and reads mapping to it visually. A poss
 First we need to index our reference genome.
 Index the genome for viewing.
 ```bash
-(user@host)-$ singularity exec docker://reslp/samtools:1.9 \
+(user@host)-$ singularity exec ~/Share/Singularity_images/samtools_1.9.sif \
                samtools faidx data/genome_assembly.fasta
 ```
 
@@ -404,13 +499,13 @@ Blobtools can extract coverage information from bam files (gladly we made one ab
 
 Blobtools needs to be run in three steps - do consult the manual on the Blobtools [webpage](https://blobtools.readme.io/docs) to get more info on what the individual steps are doing.
 ```bash
-(user@host)-$ singularity exec docker://chrishah/blobtools:v1.1.1 \
+(user@host)-$ singularity exec ~/Share/Singularity_images/blobtools_v1.1.1.sif \
                blobtools create -i data/genome_assembly.fasta -y spades -o blobtools_spades
 
-(user@host)-$ singularity exec docker://chrishah/blobtools:v1.1.1 \
+(user@host)-$ singularity exec ~/Share/Singularity_images/blobtools_v1.1.1.sif \
                blobtools view -i blobtools_spades.blobDB.json
 
-(user@host)-$ singularity exec docker://chrishah/blobtools:v1.1.1 \
+(user@host)-$ singularity exec ~/Share/Singularity_images/blobtools_v1.1.1.sif \
                blobtools plot -i blobtools_spades.blobDB.json
 ```
 
@@ -439,6 +534,25 @@ The file you want to look at first of all is: `blobtools_spades.blobDB.json.best
 
 Now, let's assume you hadn't used SPAdes as your assembler, you can still use blobtools, but in this case you need to give the coverage information in a different way, e.g. a bam file.
 ```bash
+(user@host)-$ singularity exec ~/Share/Singularity_images/blobtools_v1.1.1.sif \
+               blobtools create -i data/genome_assembly.fasta -b my_mapped_reads.sorted.bam -o blobtools_bam
+
+(user@host)-$ singularity exec ~/Share/Singularity_images/blobtools_v1.1.1.sif \
+               blobtools view -i blobtools_bam.blobDB.json
+
+(user@host)-$ singularity exec ~/Share/Singularity_images/blobtools_v1.1.1.sif \
+               blobtools plot -i blobtools_bam.blobDB.json
+
+```
+
+<details>
+   <summary>
+
+   ### using Singularity via Dockerhub (click text, if hidden)
+
+   </summary>
+
+```bash
 (user@host)-$ singularity exec docker://chrishah/blobtools:v1.1.1 \
                blobtools create -i data/genome_assembly.fasta -b my_mapped_reads.sorted.bam -o blobtools_bam
 
@@ -449,6 +563,9 @@ Now, let's assume you hadn't used SPAdes as your assembler, you can still use bl
                blobtools plot -i blobtools_bam.blobDB.json
 
 ```
+
+</details>
+
 
 <details>
    <summary>
@@ -533,14 +650,14 @@ Now, try to give this additional info to blobtools. Last thing you need is a so 
 From this you get a file `nodes.dmp` and a `names.dmp` file - these you need in the next step.
 
 ```bash
-(user@host)-$ singularity exec docker://chrishah/blobtools:v1.1.1 \
+(user@host)-$ singularity exec ~/Share/Singularity_images/blobtools_v1.1.1.sif \
                blobtools create -i data/genome_assembly.fasta -y spades \
                --nodes nodes.dmp --names names.dmp --hitsfile data/blastn.fmt6.out.txt -o blobtools_tax
 
-(user@host)-$ singularity exec docker://chrishah/blobtools:v1.1.1 \
+(user@host)-$ singularity exec ~/Share/Singularity_images/blobtools_v1.1.1.sif \
                blobtools view -i blobtools_tax.blobDB.json
 
-(user@host)-$ singularity exec docker://chrishah/blobtools:v1.1.1 \
+(user@host)-$ singularity exec ~/Share/Singularity_images/blobtools_v1.1.1.sif \
                blobtools plot -i blobtools_tax.blobDB.json
 
 ```
@@ -586,7 +703,7 @@ We could get all contig/scaffold ids that were classified as Chordata and write 
 
 Then, use another tool from the blobtools suite (see [here](https://blobtools.readme.io/docs/bamfilter)) to extract the relevant reads from the original bam file. Note that if you did not run all commands above you can still try the below by adjusting the paths to the input files to point to the precomputed results in `data/outputs/read_mapping/my_mapped_reads.sorted.bam`
 ```bash
-(user@host)-$ singularity exec docker://chrishah/blobtools:v1.1.1 \
+(user@host)-$ singularity exec ~/Share/Singularity_images/blobtools_v1.1.1.sif \
                blobtools bamfilter -b my_mapped_reads.sorted.bam -i Chordata.list.txt \
                --read_format fq --noninterleaved -o reads_Chordata
 ```
