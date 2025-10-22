@@ -164,7 +164,7 @@ and fasta files in the directory:
 If you want to know which reference sets are available `busco` also has an option to list those (note how I use `singularity` to call it now):
 
 ```bash
-(user@host)-$ singularity exec docker://ezlabgva/busco:v5.3.2_cv1 busco --list-datasets
+(user@host)-$ singularity exec ~/Share/Singularity_images/busco_v5.3.2_cv1.sif busco --list-datasets
 ```
 
 
