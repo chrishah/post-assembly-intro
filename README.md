@@ -172,20 +172,40 @@ __2b.) compleasm__
 
 A very recent addition to these kind of evaluation tools is `compleasm` and it claims to be '_a faster and more accurate reimplementation of BUSCO_'. Let's see. In this case the developers already provide us with a Docker image. As discussed (hopefully) this could be used via `Docker` or `Singularity`/`Apptainer`.
 
-So, we can __either__ run it via `Singularity`:
-
 ```bash
-(user@host)-$ singularity exec docker://huangnengcsu/compleasm:v0.2.6 \
+(user@host)-$ singularity exec ~/Share/Singularity_images/compleasm_v0.2.7.sif \
                 compleasm run \
                 -a data/genome_assembly.fasta -l eukaryota -o compleasm -t 2
 ```
-.. __or__ via `Docker`:
+
+<details>
+   <summary>
+
+   ### using Singularity via Dockerhub (click text, if hidden)
+
+   </summary>
 
 ```bash
-(user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in huangnengcsu/compleasm:v0.2.6 \
+(user@host)-$ singularity exec docker://huangnengcsu/compleasm:v0.2.7 \
+                compleasm run \
+                -a data/genome_assembly.fasta -l eukaryota -o compleasm -t 2
+```
+</details>
+
+<details>
+   <summary>
+
+   ### using Docker (click text, if hidden)
+
+   </summary>
+
+```bash
+(user@host)-$ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/in -w /in huangnengcsu/compleasm:v0.2.7 \
                 compleasm run \
                 -a /in/data/genome_assembly.fasta -l eukaryota -o compleasm -t 2
 ```
+
+</details>
 
 
 While this is running (you'd need to open a new terminal window to do this), or in case you don't want to run at this stage, we can look at the outputs that `compleasm` produces. Example results ship with the repository:
